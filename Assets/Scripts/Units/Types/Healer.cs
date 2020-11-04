@@ -4,12 +4,6 @@
     {
         public void Heal()
         {
-            
-        }
-
-        public override void Update()
-        {
-            base.Update();
         }
     }
 }

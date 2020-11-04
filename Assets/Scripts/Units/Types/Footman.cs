@@ -1,15 +1,11 @@
-﻿namespace Units.Types
+﻿using UnityEngine;
+
+namespace Units.Types
 {
     public class Footman : AttackingUnit
     {
-        public override void Attack()
+        public override void PlayAttackAnimation()
         {
-            throw new System.NotImplementedException();
-        }
-
-        public override void Update()
-        {
-            base.Update();
         }
     }
 }

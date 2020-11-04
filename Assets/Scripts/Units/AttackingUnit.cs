@@ -2,14 +2,26 @@
 
 namespace Units
 {
-    public class AttackingUnit : Unit
+    public abstract  class AttackingUnit : Unit
     {
         [SerializeField] public int attack;
         [SerializeField] public int attackSpeed;
 
-        public virtual void Attack()
+        public abstract void PlayAttackAnimation();
+        
+        public override void UpdateOverride()
         {
-            throw new System.NotImplementedException();
+            Debug.Log(InRange());
+            if (InRange())
+            {
+                Debug.Log("ATTACKING!");
+                Invoke("Attack",attackSpeed);
+            }
+        }
+        public virtual void Attack(Damageable damageable)
+        {
+            PlayAttackAnimation();
+            damageable.TakeDamage(attack);
         }
     }
 }

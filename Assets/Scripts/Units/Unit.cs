@@ -13,12 +13,14 @@ namespace Units
 
         private bool move = true;
 
-        public virtual void Update()
+        public abstract void UpdateOverride();
+
+        protected void Update()
         {
             SearchForTarget();
             Move();
+            UpdateOverride();
         }
-
 
         public void StartMoving()
         {
@@ -37,7 +39,7 @@ namespace Units
 
         public bool InRange()
         {
-            return (transform.position - target.transform.position).magnitude < stopDistance;
+            return (transform.position - target.transform.position).magnitude <= stopDistance;
         }
 
         private void Move()
