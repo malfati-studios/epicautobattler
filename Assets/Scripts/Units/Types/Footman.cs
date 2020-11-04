@@ -7,5 +7,15 @@ namespace Units.Types
         public override void PlayAttackAnimation()
         {
         }
+
+        public override void Update()
+        {
+            base.Update();
+        }
+
+        public override void Attack(Damageable damageable)
+        {
+            base.Attack(damageable);
+        }
     }
 }

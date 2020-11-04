@@ -9,7 +9,13 @@ namespace Units
         public bool TakeDamage(int damage)
         {
             HP -= damage;
+            Invoke("Die", 1f);
             return HP < 1;
+        }
+
+        private void Die()
+        {
+            Destroy(gameObject);
         }
     }
 }

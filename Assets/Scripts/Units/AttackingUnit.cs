@@ -9,19 +9,20 @@ namespace Units
 
         public abstract void PlayAttackAnimation();
         
-        public override void UpdateOverride()
-        {
-            Debug.Log(InRange());
-            if (InRange())
-            {
-                Debug.Log("ATTACKING!");
-                Invoke("Attack",attackSpeed);
-            }
-        }
         public virtual void Attack(Damageable damageable)
         {
             PlayAttackAnimation();
             damageable.TakeDamage(attack);
         }
+        
+        public virtual void Update()
+        {
+            base.Update();
+            if (InRange())
+            {
+                Invoke("Attack",attackSpeed);
+            }
+        }
+       
     }
 }

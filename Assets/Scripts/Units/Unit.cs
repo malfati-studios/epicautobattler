@@ -13,13 +13,10 @@ namespace Units
 
         private bool move = true;
 
-        public abstract void UpdateOverride();
-
         protected void Update()
         {
             SearchForTarget();
             Move();
-            UpdateOverride();
         }
 
         public void StartMoving()
