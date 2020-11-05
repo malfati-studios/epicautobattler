@@ -6,6 +6,11 @@
         {
         }
 
+        public override bool IsSupportClass()
+        {
+            return false;
+        }
+
         public override void Update()
         {
             base.Update();

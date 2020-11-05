@@ -8,7 +8,6 @@ namespace Units
 
         public abstract void PlayDeathAnimation();
         public abstract void PlayDamageAnimation();
-
         
         public bool TakeDamage(int damage)
         {

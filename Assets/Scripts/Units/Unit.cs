@@ -9,9 +9,11 @@ namespace Units
         [SerializeField] public GameController.Faction faction;
         [SerializeField] public float speed;
         [SerializeField] public float stopDistance;
-        [SerializeField] public GameObject target;
+        [SerializeField] public Unit target;
 
         private bool move = true;
+
+        public abstract bool IsSupportClass();
 
         protected virtual void Update()
         {
@@ -29,7 +31,7 @@ namespace Units
             move = false;
         }
 
-        public void SetTarget(GameObject target)
+        public void SetTarget(Unit target)
         {
             this.target = target;
         }
@@ -63,11 +65,9 @@ namespace Units
         {
             if (!target)
             {
-                Unit uTarget = BattleController.instance.GetNearestAlly(this);
-                if (uTarget != null)
-                {
-                    target = BattleController.instance.GetNearestAlly(this).gameObject;
-                }
+                target = IsSupportClass()
+                    ? BattleController.instance.GetNearestAlly(this)
+                    : BattleController.instance.GetNearestEnemy(this);
             }
         }
     }
