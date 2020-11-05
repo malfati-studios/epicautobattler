@@ -21,6 +21,11 @@ public class BattleController : MonoBehaviour
         return GetClosestUnit(unit, enemies);
     }
 
+    public void NotifyDeath(GameObject go)
+    {
+        aliveUnits.Remove(go.GetComponent<Unit>());
+    }
+
     private void Awake()
     {
         Initialize();
@@ -56,6 +61,7 @@ public class BattleController : MonoBehaviour
 
     private Unit GetClosestUnit(Unit unit, List<Unit> units)
     {
+        if (units.Count == 0) return null;
         Unit closestOtherUnit = units[0];
         float closestDistance = GetDistanceToUnit(unit, units[0]);
 

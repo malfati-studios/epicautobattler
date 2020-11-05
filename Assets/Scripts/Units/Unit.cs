@@ -13,7 +13,7 @@ namespace Units
 
         private bool move = true;
 
-        protected void Update()
+        protected virtual void Update()
         {
             SearchForTarget();
             Move();
@@ -34,6 +34,16 @@ namespace Units
             this.target = target;
         }
 
+        public void ClearTarget()
+        {
+            target = null;
+        }
+
+        public bool HasTarget()
+        {
+            return target != null;
+        }
+
         public bool InRange()
         {
             return (transform.position - target.transform.position).magnitude <= stopDistance;
@@ -51,7 +61,14 @@ namespace Units
 
         private void SearchForTarget()
         {
-            if (!target) target = BattleController.instance.GetNearestAlly(this).gameObject;
+            if (!target)
+            {
+                Unit uTarget = BattleController.instance.GetNearestAlly(this);
+                if (uTarget != null)
+                {
+                    target = BattleController.instance.GetNearestAlly(this).gameObject;
+                }
+            }
         }
     }
 }

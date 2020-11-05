@@ -1,28 +1,42 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections;
+using UnityEngine;
 
 namespace Units
 {
-    public abstract  class AttackingUnit : Unit
+    public abstract class AttackingUnit : Unit
     {
         [SerializeField] public int attack;
-        [SerializeField] public int attackSpeed;
+        [SerializeField] public int millisBetweenAttacks;
+
+        private DateTime lastAttackTime = DateTime.Now;
 
         public abstract void PlayAttackAnimation();
-        
-        public virtual void Attack(Damageable damageable)
+
+        public virtual void Attack()
         {
+            lastAttackTime = DateTime.Now;
             PlayAttackAnimation();
-            damageable.TakeDamage(attack);
+            bool died = target.GetComponent<Damageable>().TakeDamage(attack);
+            if (died)
+            {
+                ClearTarget();
+            }
+            Debug.Log("ATTACKING");
         }
-        
-        public virtual void Update()
+
+        public new virtual void Update()
         {
             base.Update();
-            if (InRange())
+            if (HasTarget() && InRange() && CheckAttackTime())
             {
-                Invoke("Attack",attackSpeed);
+                Attack();
             }
         }
-       
+
+        private bool CheckAttackTime()
+        {
+            return DateTime.Now > lastAttackTime.AddMilliseconds(millisBetweenAttacks);
+        }
     }
 }

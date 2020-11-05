@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 namespace Units.Types
 {
@@ -13,9 +14,9 @@ namespace Units.Types
             base.Update();
         }
 
-        public override void Attack(Damageable damageable)
+        public override void Attack()
         {
-            base.Attack(damageable);
+            base.Attack();
         }
     }
 }
