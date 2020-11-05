@@ -14,6 +14,8 @@ namespace Units
         private bool move = true;
 
         public abstract bool IsSupportClass();
+        public abstract void PlayMovingAnimation();
+        public abstract void StopMovingAnimation();
 
         protected virtual void Update()
         {
@@ -51,16 +53,31 @@ namespace Units
             return (transform.position - target.transform.position).magnitude <= stopDistance;
         }
 
+        public int GetMovingAxis()
+        {
+            if (InRange()) return 0;
+            if (target.transform.position.x > transform.position.x)
+            {
+                return 1;
+            }
+
+            return -1;
+        }
+
         private void Move()
         {
-            if (!move) return;
-            if (!target) return;
-            if (InRange()) return;
-
+            if (!move || !target || InRange())
+            {
+                StopMovingAnimation();
+                return;
+            }
+           
+            PlayMovingAnimation();
             transform.position =
                 Vector3.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
         }
 
+       
         private void SearchForTarget()
         {
             if (!target)
