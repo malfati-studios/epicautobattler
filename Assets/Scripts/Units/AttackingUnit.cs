@@ -22,7 +22,6 @@ namespace Units
             {
                 ClearTarget();
             }
-            Debug.Log("ATTACKING");
         }
 
         public new virtual void Update()

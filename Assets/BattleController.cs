@@ -7,7 +7,6 @@ public class BattleController : MonoBehaviour
     public static BattleController instance;
     
     [SerializeField] private List<Unit> aliveUnits = new List<Unit>();
-    [SerializeField] private List<Unit> deadUnits = new List<Unit>();
     
     public Unit GetNearestAlly(Unit unit)
     {

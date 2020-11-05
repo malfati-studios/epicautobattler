@@ -6,12 +6,17 @@ namespace Units
     {
         [SerializeField] public int HP;
 
+        public abstract void PlayDeathAnimation();
+        public abstract void PlayDamageAnimation();
+
+        
         public bool TakeDamage(int damage)
         {
             HP -= damage;
+            PlayDamageAnimation();
             if (HP < 1)
             {
-                Invoke("Die", 1f);
+                Die();
                 return true;
             }
             return false;
@@ -20,6 +25,12 @@ namespace Units
         private void Die()
         {
             BattleController.instance.NotifyDeath(gameObject);
+            PlayDeathAnimation();
+            Invoke("DestroyInstance", 1f);
+        }
+
+        private void DestroyInstance()
+        {
             Destroy(gameObject);
         }
     }
