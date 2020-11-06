@@ -9,12 +9,11 @@ namespace UI
     {
         public Action<GameObject> buttonListeners;
         [SerializeField] private GameObject unitPrefab;
+        [SerializeField] private int unitCount;
 
         private Image unitImage;
         private TextMeshProUGUI unitCountTxt;
-        private int unitCount;
-    
-    
+      
         public void SetUnitCount(int count)
         {
             unitCount = count;

@@ -222,6 +222,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitPrefab: {fileID: 2880099801877461587, guid: 027403669be641b45b8a6f491637bad6, type: 3}
+  unitCount: 10
 --- !u!1 &8118848387877493886
 GameObject:
   m_ObjectHideFlags: 0

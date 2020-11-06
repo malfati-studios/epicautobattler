@@ -184,14 +184,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Footman
       objectReference: {fileID: 0}
-    - target: {fileID: 5036721200507928896, guid: 027403669be641b45b8a6f491637bad6, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 1.98
-      objectReference: {fileID: 0}
-    - target: {fileID: 5036721200507928896, guid: 027403669be641b45b8a6f491637bad6, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.68
-      objectReference: {fileID: 0}
     - target: {fileID: 8139664288065294789, guid: 027403669be641b45b8a6f491637bad6, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.584
@@ -236,14 +228,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8823385759620511343, guid: 027403669be641b45b8a6f491637bad6, type: 3}
-      propertyPath: m_FlipX
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8823385759620511343, guid: 027403669be641b45b8a6f491637bad6, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: f6f9e570d74e67b48b60612dc036a89a, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 027403669be641b45b8a6f491637bad6, type: 3}
 --- !u!1001 &154801032
@@ -11599,6 +11583,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1415050327}
     m_Modifications:
+    - target: {fileID: 5785971662609680480, guid: f7d6afedffdd9e446a2690fc36fd9b32, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 8c556e96f1a21074d9719eeacf724866, type: 3}
     - target: {fileID: 8118848386607340928, guid: f7d6afedffdd9e446a2690fc36fd9b32, type: 3}
       propertyPath: m_Name
       value: UnitButton
