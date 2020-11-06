@@ -9,8 +9,9 @@ namespace Units.Types
         private Animator animator;
         private static readonly int MovingAxis = Animator.StringToHash("MovingAxis");
 
-        public override void PlayAttackAnimation()
+        public override void PlayAttackAnimation(Vector2 attackingDirection)
         {
+            
         }
 
         public override bool IsSupportClass()
@@ -25,6 +26,8 @@ namespace Units.Types
 
         public override void StopMovingAnimation()
         {
+            animator.SetInteger(MovingAxis, 0);
+
         }
 
         public void Start()

@@ -11,12 +11,12 @@ namespace Units
 
         private DateTime lastAttackTime = DateTime.Now;
 
-        public abstract void PlayAttackAnimation();
+        public abstract void PlayAttackAnimation(Vector2 attackingDirection);
 
         public virtual void Attack()
         {
             lastAttackTime = DateTime.Now;
-            PlayAttackAnimation();
+            PlayAttackAnimation(GetAttackingDirection());
             bool died = target.GetComponent<Damageable>().TakeDamage(attack);
             if (died)
             {
@@ -36,6 +36,11 @@ namespace Units
         private bool CheckAttackTime()
         {
             return DateTime.Now > lastAttackTime.AddMilliseconds(millisBetweenAttacks);
+        }
+
+        private Vector2 GetAttackingDirection()
+        {
+            return (target.transform.position - transform.position).normalized;
         }
     }
 }

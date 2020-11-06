@@ -29,7 +29,10 @@ namespace UI
 
         public void OnUnitButtonClick()
         {
-            buttonListeners.Invoke(unitPrefab);
+            if (buttonListeners != null)
+            {
+                buttonListeners.Invoke(unitPrefab);
+            }
             unitCount--;
             RefreshCount();
             if (unitCount == 0)
@@ -40,13 +43,13 @@ namespace UI
         
         private void Awake()
         {
-            unitImage = gameObject.transform.GetChild(0).GetComponent<Image>();
-            unitCountTxt = gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+           unitImage = gameObject.transform.GetChild(0).GetComponent<Image>();
+           unitCountTxt = gameObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
         }
 
         private void RefreshCount()
         {
-            unitCountTxt.text = unitCount.ToString();
+          unitCountTxt.text = unitCount.ToString();
         }
     }
 }

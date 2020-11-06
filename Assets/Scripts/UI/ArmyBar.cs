@@ -1,5 +1,4 @@
-﻿using TMPro;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class ArmyBar : MonoBehaviour
@@ -7,7 +6,6 @@ public class ArmyBar : MonoBehaviour
     private int currHp = 0;
     private int maxHp = 0;
     [SerializeField] private Image fill = null;
-    [SerializeField] private TextMeshProUGUI txtHealth = null;
     public void UpdateHP(int hp)
     {
         currHp = hp;
