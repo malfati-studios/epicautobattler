@@ -35,7 +35,6 @@ namespace Units
 
         protected virtual void Update()
         {
-            SearchForTarget();
             Move();
         }
 
@@ -79,6 +78,16 @@ namespace Units
 
             return -1;
         }
+        
+        public void SearchForTarget()
+        {
+            if (!target)
+            {
+                target = IsSupportClass()
+                    ? BattleController.instance.GetNearestAlly(this)
+                    : BattleController.instance.GetNearestEnemy(this);
+            }
+        }
 
         private void Move()
         {
@@ -93,15 +102,5 @@ namespace Units
                 Vector3.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
         }
 
-       
-        private void SearchForTarget()
-        {
-            if (!target)
-            {
-                target = IsSupportClass()
-                    ? BattleController.instance.GetNearestAlly(this)
-                    : BattleController.instance.GetNearestEnemy(this);
-            }
-        }
     }
 }

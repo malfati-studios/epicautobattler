@@ -1,5 +1,6 @@
 ﻿using System;
 using TMPro;
+using Units;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,7 +8,7 @@ namespace UI
 {
     public class UnitButton : MonoBehaviour
     {
-        public Action<GameObject> buttonListeners;
+        public Action<Unit> buttonListeners;
         [SerializeField] private GameObject unitPrefab;
         [SerializeField] private int unitCount;
 
@@ -23,14 +24,14 @@ namespace UI
         public void SetUnitPrefab(GameObject prefab)
         {
             unitPrefab = prefab;
-            unitImage.sprite = prefab.GetComponent<Sprite>();
+            unitImage.sprite = prefab.transform.GetChild(0).GetComponent<Sprite>();
         }
 
         public void OnUnitButtonClick()
         {
             if (buttonListeners != null)
             {
-                buttonListeners.Invoke(unitPrefab);
+                buttonListeners.Invoke(unitPrefab.GetComponent<Unit>());
             }
             unitCount--;
             RefreshCount();

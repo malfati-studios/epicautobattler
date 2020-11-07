@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using UI;
 using Units;
 using UnityEngine;
 using Utils;
@@ -16,9 +15,6 @@ namespace Controllers
         [SerializeField] private List<Unit> alivePlayerUnits = new List<Unit>();
         [SerializeField] private List<Unit> aliveEnemyUnits = new List<Unit>();
 
-        [SerializeField] private ArmyBar playerBar;
-        [SerializeField] private ArmyBar enemyBar;
-
         [SerializeField] private Dictionary<UnitType, int> currentUnitCredits;
 
         public Unit GetNearestAlly(Unit unit)
@@ -27,6 +23,7 @@ namespace Controllers
             {
                 return UnitDistanceHelper.GetClosestUnit(unit, alivePlayerUnits);
             }
+
             return UnitDistanceHelper.GetClosestUnit(unit, aliveEnemyUnits);
         }
 
@@ -36,6 +33,7 @@ namespace Controllers
             {
                 return UnitDistanceHelper.GetClosestUnit(unit, aliveEnemyUnits);
             }
+
             return UnitDistanceHelper.GetClosestUnit(unit, alivePlayerUnits);
         }
 
@@ -50,23 +48,18 @@ namespace Controllers
                 aliveEnemyUnits.Remove(go.GetComponent<Unit>());
             }
 
-            RefreshArmyBarsUI();
+            LevelUIController.instance.RefreshArmyBarsUI(alivePlayerUnits.Count, allPlayerUnitsCount,
+                aliveEnemyUnits.Count, allEnemyUnitsCount);
         }
 
         public void NotifyNewUnit(Unit u)
         {
-            if (u.faction == Faction.PLAYER)
-            {
-                alivePlayerUnits.Add(u);
-                allPlayerUnitsCount++;
-            }
-            else
-            {
-                aliveEnemyUnits.Add(u);
-                allEnemyUnitsCount++;
-            }
+            alivePlayerUnits.Add(u);
+            allPlayerUnitsCount++;
+            currentUnitCredits[u.type] = currentUnitCredits[u.type] - 1;
 
-            RefreshArmyBarsUI();
+            LevelUIController.instance.RefreshArmyBarsUI(alivePlayerUnits.Count, allPlayerUnitsCount,
+                aliveEnemyUnits.Count, allEnemyUnitsCount);
         }
 
         private void Awake()
@@ -76,13 +69,12 @@ namespace Controllers
 
         private void Start()
         {
+            currentUnitCredits = new Dictionary<UnitType, int>();
+            currentUnitCredits[UnitType.Footman] = 10;
+            currentUnitCredits[UnitType.Healer] = 10;
+            LevelUIController.instance.ConfigureButtons(currentUnitCredits);
             ScanUnits();
-        }
-
-        private void RefreshArmyBarsUI()
-        {
-            playerBar.UpdateBar(alivePlayerUnits.Count, allPlayerUnitsCount);
-            enemyBar.UpdateBar(aliveEnemyUnits.Count, allEnemyUnitsCount);
+            StartBattle();
         }
 
         private void ScanUnits()
@@ -103,6 +95,19 @@ namespace Controllers
 
             allEnemyUnitsCount = aliveEnemyUnits.Count;
             allPlayerUnitsCount = alivePlayerUnits.Count;
+        }
+
+        private void StartBattle()
+        {
+            foreach (var aliveEnemyUnit in aliveEnemyUnits)
+            {
+                aliveEnemyUnit.SearchForTarget();
+            }
+
+            foreach (var alivePlayerUnit in alivePlayerUnits)
+            {
+                alivePlayerUnit.SearchForTarget();
+            }
         }
 
         private void Initialize()
