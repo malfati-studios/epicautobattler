@@ -53,6 +53,7 @@ MonoBehaviour:
   target: {fileID: 0}
   attack: 10
   millisBetweenAttacks: 2000
+  stats: {fileID: 11400000, guid: 2f06498354d4a7d4786a1e331d606cec, type: 2}
 --- !u!95 &405045366
 Animator:
   serializedVersion: 3

@@ -1,85 +1,121 @@
 ﻿using System.Collections.Generic;
+using UI;
 using Units;
 using UnityEngine;
+using Utils;
 
-public class BattleController : MonoBehaviour
+namespace Controllers
 {
-    public static BattleController instance;
-    
-    
-    [SerializeField] private List<Unit> aliveUnits = new List<Unit>();
-    
-    
-    public Unit GetNearestAlly(Unit unit)
+    public class BattleController : MonoBehaviour
     {
-        List<Unit> allies = aliveUnits.FindAll(u => u.faction == unit.faction && u.gameObject.GetInstanceID() != unit.gameObject.GetInstanceID());
-        return GetClosestUnit(unit, allies);
-    }
+        public static BattleController instance;
 
-    public Unit GetNearestEnemy(Unit unit)
-    {
-        List<Unit> enemies = aliveUnits.FindAll(u => u.faction != unit.faction && u.gameObject.GetInstanceID() != unit.gameObject.GetInstanceID());
-        return GetClosestUnit(unit, enemies);
-    }
+        [SerializeField] private int allEnemyUnitsCount;
+        [SerializeField] private int allPlayerUnitsCount;
 
-    public void NotifyDeath(GameObject go)
-    {
-        aliveUnits.Remove(go.GetComponent<Unit>());
-    }
+        [SerializeField] private List<Unit> alivePlayerUnits = new List<Unit>();
+        [SerializeField] private List<Unit> aliveEnemyUnits = new List<Unit>();
 
-    private void Awake()
-    {
-        Initialize();
-    }
+        [SerializeField] private ArmyBar playerBar;
+        [SerializeField] private ArmyBar enemyBar;
 
-    private void Start()
-    {
-        ScanUnits();
-    }
+        [SerializeField] private Dictionary<UnitType, int> currentUnitCredits;
 
-    private void ScanUnits()
-    {
-        GameObject[] units = GameObject.FindGameObjectsWithTag("Unit");
-        foreach (var goUnit in units)
+        public Unit GetNearestAlly(Unit unit)
         {
-            aliveUnits.Add(goUnit.GetComponent<Unit>());
-        }
-    }
-
-    private void Initialize()
-    {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
-
-
-    private Unit GetClosestUnit(Unit unit, List<Unit> units)
-    {
-        if (units.Count == 0) return null;
-        Unit closestOtherUnit = units[0];
-        float closestDistance = GetDistanceToUnit(unit, units[0]);
-
-        foreach (var otherUnit in units)
-        {
-            if (GetDistanceToUnit(unit, otherUnit) < closestDistance)
+            if (unit.faction == Faction.PLAYER)
             {
-                closestOtherUnit = otherUnit;
-                closestDistance = GetDistanceToUnit(unit, otherUnit);
+                return UnitDistanceHelper.GetClosestUnit(unit, alivePlayerUnits);
+            }
+            return UnitDistanceHelper.GetClosestUnit(unit, aliveEnemyUnits);
+        }
+
+        public Unit GetNearestEnemy(Unit unit)
+        {
+            if (unit.faction == Faction.PLAYER)
+            {
+                return UnitDistanceHelper.GetClosestUnit(unit, aliveEnemyUnits);
+            }
+            return UnitDistanceHelper.GetClosestUnit(unit, alivePlayerUnits);
+        }
+
+        public void NotifyDeath(Unit go)
+        {
+            if (go.faction == Faction.PLAYER)
+            {
+                alivePlayerUnits.Remove(go.GetComponent<Unit>());
+            }
+            else
+            {
+                aliveEnemyUnits.Remove(go.GetComponent<Unit>());
+            }
+
+            RefreshArmyBarsUI();
+        }
+
+        public void NotifyNewUnit(Unit u)
+        {
+            if (u.faction == Faction.PLAYER)
+            {
+                alivePlayerUnits.Add(u);
+                allPlayerUnitsCount++;
+            }
+            else
+            {
+                aliveEnemyUnits.Add(u);
+                allEnemyUnitsCount++;
+            }
+
+            RefreshArmyBarsUI();
+        }
+
+        private void Awake()
+        {
+            Initialize();
+        }
+
+        private void Start()
+        {
+            ScanUnits();
+        }
+
+        private void RefreshArmyBarsUI()
+        {
+            playerBar.UpdateBar(alivePlayerUnits.Count, allPlayerUnitsCount);
+            enemyBar.UpdateBar(aliveEnemyUnits.Count, allEnemyUnitsCount);
+        }
+
+        private void ScanUnits()
+        {
+            GameObject[] units = GameObject.FindGameObjectsWithTag("Unit");
+            foreach (var goUnit in units)
+            {
+                Unit u = goUnit.GetComponent<Unit>();
+                if (u.faction == Faction.PLAYER)
+                {
+                    alivePlayerUnits.Add(u);
+                }
+                else
+                {
+                    aliveEnemyUnits.Add(u);
+                }
+            }
+
+            allEnemyUnitsCount = aliveEnemyUnits.Count;
+            allPlayerUnitsCount = alivePlayerUnits.Count;
+        }
+
+        private void Initialize()
+        {
+            if (instance == null)
+            {
+                instance = this;
+                DontDestroyOnLoad(gameObject);
+            }
+            else
+            {
+                Destroy(gameObject);
             }
         }
-
-        return closestOtherUnit;
-    }
-
-    private float GetDistanceToUnit(Unit a, Unit b)
-    {
-        return (a.transform.position - b.transform.position).magnitude;
     }
 }

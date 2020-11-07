@@ -1,20 +1,14 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class ArmyBar : MonoBehaviour
+namespace UI
 {
-    private int currHp = 0;
-    private int maxHp = 0;
-    [SerializeField] private Image fill = null;
-    public void UpdateHP(int hp)
+    public class ArmyBar : MonoBehaviour
     {
-        currHp = hp;
-    }
-
-    public void ConfigureBar(int hp, int maxHp)
-    {
-        this.maxHp = maxHp;
-        currHp = hp;
-        UpdateHP(hp);
+        [SerializeField] private Image fill = null;
+        public void UpdateBar(int aliveUnits, int allUnits)
+        {
+            fill.fillAmount = (float) aliveUnits / (float) allUnits;
+        }
     }
 }

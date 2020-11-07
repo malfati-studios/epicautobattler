@@ -1,6 +1,6 @@
 ﻿namespace Units
 {
-    public enum UnitType
+    public enum  UnitType
     {
         Footman,
         Healer,

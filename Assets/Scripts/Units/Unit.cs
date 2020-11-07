@@ -1,5 +1,4 @@
-﻿using System;
-using Controllers;
+﻿using Controllers;
 using UnityEngine;
 
 namespace Units
@@ -7,7 +6,7 @@ namespace Units
     public abstract class Unit : Damageable
     {
         [SerializeField] public UnitType type;
-        [SerializeField] public GameController.Faction faction;
+        [SerializeField] public Faction faction;
         [SerializeField] public float speed;
         [SerializeField] public float stopDistance;
         [SerializeField] public Unit target;
@@ -29,7 +28,7 @@ namespace Units
 
         }
 
-        private void Start()
+        public virtual void Start()
         {
             animator = GetComponent<Animator>();
         }

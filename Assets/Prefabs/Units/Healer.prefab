@@ -128,12 +128,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HP: 80
-  type: 0
+  type: 1
   faction: 0
   speed: 0.5
   stopDistance: 2
   target: {fileID: 0}
   millisBetweenSupports: 0
+  stats: {fileID: 11400000, guid: 67fbd3ef82f1df94d85582891d0cb538, type: 2}
 --- !u!95 &317667187
 Animator:
   serializedVersion: 3
