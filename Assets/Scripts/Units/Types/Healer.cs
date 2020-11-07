@@ -16,15 +16,6 @@
             return true;
         }
 
-        public override void PlayMovingAnimation()
-        {
-        }
-
-        public override void StopMovingAnimation()
-        {
-            
-        }
-
         public override void PlaySupportAnimation()
         {
             

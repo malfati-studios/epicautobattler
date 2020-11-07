@@ -1,4 +1,5 @@
-﻿using Controllers;
+﻿using System;
+using Controllers;
 using UnityEngine;
 
 namespace Units
@@ -12,10 +13,26 @@ namespace Units
         [SerializeField] public Unit target;
 
         private bool move = true;
+        private Animator animator;
+        private static readonly int MovingAxis = Animator.StringToHash("MovingAxis");
 
         public abstract bool IsSupportClass();
-        public abstract void PlayMovingAnimation();
-        public abstract void StopMovingAnimation();
+    
+        private void PlayMovingAnimation()
+        {
+            animator.SetInteger(MovingAxis, GetMovingAxis());
+        }
+
+        private void StopMovingAnimation()
+        {
+            animator.SetInteger(MovingAxis, 0);
+
+        }
+
+        private void Start()
+        {
+            animator = GetComponent<Animator>();
+        }
 
         protected virtual void Update()
         {
