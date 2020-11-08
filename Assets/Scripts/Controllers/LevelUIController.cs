@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace Controllers
 {
+    // ReSharper disable once InconsistentNaming
     public class LevelUIController : MonoBehaviour
     {
         public static LevelUIController instance;
@@ -17,6 +18,7 @@ namespace Controllers
         [SerializeField] private GameObject footmanPrefab;
         [SerializeField] private GameObject healerPrefab;
         
+        // ReSharper disable once InconsistentNaming
         public void RefreshArmyBarsUI(int alivePlayerUnitsCount, int allPlayerUnitsCount, int aliveEnemyUnitsCount, int allEnemyUnitsCount)
         {
             playerBar.UpdateBar(alivePlayerUnitsCount, allPlayerUnitsCount);
@@ -39,6 +41,7 @@ namespace Controllers
             BattleController.instance.NotifyNewUnit(unit);
         }
 
+        #region UNITY_CALLS
         private void Start()
         {
             playerBar = GameObject.FindGameObjectWithTag("PlayerBar").GetComponent<ArmyBar>();
@@ -64,5 +67,7 @@ namespace Controllers
                 Destroy(gameObject);
             }
         }
+        
+        #endregion
     }
 }

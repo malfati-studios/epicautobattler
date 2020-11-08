@@ -43,5 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5088b1dc6df148c42a7218c5f9a6711a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aliveUnits: []
-  deadUnits: []
+  allEnemyUnitsCount: 0
+  allPlayerUnitsCount: 0
+  alivePlayerUnits: []
+  aliveEnemyUnits: []

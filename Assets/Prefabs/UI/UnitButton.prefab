@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f5d726c7bc74f7746bf630ef7b17162d, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 5725466604919431257}
   m_Layer: 5
   m_Name: UnitButton
-  m_TagString: Untagged
+  m_TagString: HealerButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -221,7 +221,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50b4729f06b7b664b87512d88e990311, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unitPrefab: {fileID: 2880099801877461587, guid: 027403669be641b45b8a6f491637bad6, type: 3}
+  unitPrefab: {fileID: 1806916297380161318, guid: 3b14dc718f374214e93a0695dce2ba4e, type: 3}
   unitCount: 10
 --- !u!1 &8118848387877493886
 GameObject:

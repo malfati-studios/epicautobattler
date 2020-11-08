@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8864983057032818119}
-  - component: {fileID: -5055872988292042214}
+  - component: {fileID: 910723715}
   m_Layer: 0
   m_Name: LevelUIController
   m_TagString: Untagged
@@ -31,7 +31,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-5055872988292042214
+--- !u!114 &910723715
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -47,5 +47,5 @@ MonoBehaviour:
   enemyBar: {fileID: 0}
   footmanButton: {fileID: 0}
   healerButton: {fileID: 0}
-  footmanPrefab: {fileID: 0}
-  healerPrefab: {fileID: 0}
+  footmanPrefab: {fileID: 2880099801877461587, guid: 027403669be641b45b8a6f491637bad6, type: 3}
+  healerPrefab: {fileID: 1806916297380161318, guid: 3b14dc718f374214e93a0695dce2ba4e, type: 3}
