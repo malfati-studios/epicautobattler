@@ -41,14 +41,21 @@ namespace Controllers
         #endregion
 
         #region PUBLIC_METHODS
-        public void LoadScene(int sceneIndex)
+        
+        public void LoadSceneInstant(int sceneIndex)
+        {
+            //Guardamos la escena proxima y abrimos la transicion
+            nextScene = sceneIndex;
+            SceneManager.LoadScene(nextScene);
+        }
+        public void LoadSceneWithTransition(int sceneIndex)
         {
             //Guardamos la escena proxima y abrimos la transicion
             nextScene = sceneIndex;
             OnTransitionStart();
         }
 
-        public void LoadScene(SCENES scene)
+        public void LoadSceneWithTransition(SCENES scene)
         {
             //mismo caso, recibiendo como parametro un enum que casteamos a int por el build index que configuramos.
             nextScene = (int)scene;

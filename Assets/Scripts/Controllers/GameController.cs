@@ -7,7 +7,7 @@ namespace Controllers
 {
     public class GameController : MonoBehaviour
     {
-        private static GameController instance;
+        public static GameController instance;
 
         [SerializeField] private StartingConfiguration startingConfiguration;
         [SerializeField] private int currentLvl = 0;
@@ -17,29 +17,37 @@ namespace Controllers
         public void StartGame()
         {
             currentCredits = startingConfiguration.startingCredits;
+            unitCredits = new Dictionary<UnitType, int>();
             unitCredits.Add(UnitType.Archer, startingConfiguration.startingArchers);
             unitCredits.Add(UnitType.Footman, startingConfiguration.startingFootmen);
             unitCredits.Add(UnitType.Healer, startingConfiguration.startingHealers);
-            SceneController.instance.LoadScene(1);
+            SceneController.instance.LoadSceneInstant(1);
         }
 
         public void StartLevel1()
         {
-            SceneController.instance.LoadScene(2);
+            SceneController.instance.LoadSceneWithTransition(2);
             currentLvl = 1;
         }
         
         public void StartLevel2()
         {
-            SceneController.instance.LoadScene(3);
+            SceneController.instance.LoadSceneWithTransition(3);
             currentLvl = 2;
 
         }
         
         public void StartLevel3()
         {
-            SceneController.instance.LoadScene(4);
+            SceneController.instance.LoadSceneWithTransition(4);
             currentLvl = 3;
+        }
+        
+        
+        public void OnMapButtonPressed(int mapLvl)
+        {
+            currentLvl = mapLvl;
+            SceneController.instance.LoadSceneWithTransition(mapLvl+1);
         }
 
         private void Awake()
@@ -59,5 +67,6 @@ namespace Controllers
                 Destroy(gameObject);
             }
         }
+
     }
 }
