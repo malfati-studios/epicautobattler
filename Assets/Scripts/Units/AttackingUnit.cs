@@ -16,14 +16,14 @@ namespace Units
         {
             lastAttackTime = DateTime.Now;
             PlayAttackAnimation(GetAttackingDirection());
-            bool died = target.GetComponent<Damageable>().TakeDamage(attack);
+            bool died = target.GetComponent<GameEntity>().TakeDamage(attack);
             if (died)
             {
                 ClearTarget();
             }
         }
 
-        public new virtual void Update()
+        protected new virtual void Update()
         {
             base.Update();
             if (HasTarget() && InRange() && CheckAttackTime())

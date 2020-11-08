@@ -17,7 +17,7 @@ namespace Units.Types
             return false;
         }
 
-        public override void Update()
+        protected override void Update()
         {
             base.Update();
         }
@@ -35,7 +35,7 @@ namespace Units.Types
         {
         }
 
-        public override void Start()
+        protected override void Start()
         {
             base.Start();
             InitializeStats();

@@ -4,11 +4,14 @@ using UnityEngine;
 
 namespace Units
 {
-    public abstract class Damageable : MonoBehaviour
+    public abstract class GameEntity : MonoBehaviour
     {
         public Action<bool> deathListeners;
         
         [SerializeField] public int HP;
+
+        private GameObject image;
+        
         public abstract void PlayDeathAnimation();
         public abstract void PlayDamageAnimation();
         
@@ -22,6 +25,11 @@ namespace Units
                 return true;
             }
             return false;
+        }
+
+        public Sprite GetSprite()
+        {
+            return transform.GetChild(0).GetComponent<SpriteRenderer>().sprite;
         }
 
         private void Die()

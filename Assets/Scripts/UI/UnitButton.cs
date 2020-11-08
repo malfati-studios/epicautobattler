@@ -24,7 +24,7 @@ namespace UI
         public void SetUnitPrefab(GameObject prefab)
         {
             unitPrefab = prefab;
-            unitImage.sprite = prefab.transform.GetChild(0).GetComponent<Sprite>();
+            unitImage.sprite = prefab.GetComponent<Unit>().GetSprite();
         }
 
         public void OnUnitButtonClick()

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Units
 {
-    public abstract class Unit : Damageable
+    public abstract class Unit : GameEntity
     {
         [SerializeField] public UnitType type;
         [SerializeField] public Faction faction;
@@ -28,7 +28,7 @@ namespace Units
 
         }
 
-        public virtual void Start()
+        protected virtual void Start()
         {
             animator = GetComponent<Animator>();
         }
