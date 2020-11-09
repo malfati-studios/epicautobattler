@@ -24,7 +24,6 @@ namespace Controllers
             currentUnitCredits[UnitType.Healer] = unitCredits[UnitType.Healer];
             this.battleUIController = battleUIController;
             ScanUnits();
-            StartBattle();
         }
 
         public Unit GetNearestAlly(Unit unit)
