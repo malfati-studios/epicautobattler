@@ -25,6 +25,9 @@ namespace UI
         {
             unitPrefab = prefab;
             unitImage.sprite = prefab.GetComponent<Unit>().GetSprite();
+            Color tmp = unitImage.color;
+            tmp.a = 1f;
+            unitImage.color = tmp;
         }
 
         public void OnUnitButtonClick()

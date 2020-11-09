@@ -180,6 +180,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1415050327}
     m_Modifications:
+    - target: {fileID: 5785971662609680480, guid: f7d6afedffdd9e446a2690fc36fd9b32, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8118848386607340928, guid: f7d6afedffdd9e446a2690fc36fd9b32, type: 3}
       propertyPath: m_Name
       value: HealerButton
@@ -267,6 +271,10 @@ PrefabInstance:
     - target: {fileID: 8118848386607340929, guid: f7d6afedffdd9e446a2690fc36fd9b32, type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8118848387727420982, guid: f7d6afedffdd9e446a2690fc36fd9b32, type: 3}
+      propertyPath: m_text
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f7d6afedffdd9e446a2690fc36fd9b32, type: 3}
@@ -11467,6 +11475,14 @@ PrefabInstance:
       propertyPath: unitPrefab
       value: 
       objectReference: {fileID: 2880099801877461587, guid: 027403669be641b45b8a6f491637bad6, type: 3}
+    - target: {fileID: 5785971662609680480, guid: f7d6afedffdd9e446a2690fc36fd9b32, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5785971662609680480, guid: f7d6afedffdd9e446a2690fc36fd9b32, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8118848386607340928, guid: f7d6afedffdd9e446a2690fc36fd9b32, type: 3}
       propertyPath: m_Name
       value: FootmanButton
@@ -11558,6 +11574,18 @@ PrefabInstance:
     - target: {fileID: 8118848386607340929, guid: f7d6afedffdd9e446a2690fc36fd9b32, type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8118848386607340931, guid: f7d6afedffdd9e446a2690fc36fd9b32, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8118848387727420982, guid: f7d6afedffdd9e446a2690fc36fd9b32, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8118848387727420982, guid: f7d6afedffdd9e446a2690fc36fd9b32, type: 3}
+      propertyPath: m_text
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f7d6afedffdd9e446a2690fc36fd9b32, type: 3}

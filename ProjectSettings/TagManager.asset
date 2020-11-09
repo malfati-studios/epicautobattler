@@ -9,6 +9,7 @@ TagManager:
   - EnemyBar
   - FootmanButton
   - HealerButton
+  - StartBattleButton
   layers:
   - Default
   - TransparentFX
