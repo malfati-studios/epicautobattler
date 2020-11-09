@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1733040622417261567}
   - component: {fileID: 1733040622417261566}
   m_Layer: 0
-  m_Name: BattleController
+  m_Name: BattleLogicController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -11,7 +11,7 @@ namespace Units
         [SerializeField] public int HP;
 
         private GameObject image;
-        protected BattleController battleController;
+        protected BattleLogicController battleLogicController;
         
         public abstract void PlayDeathAnimation();
         public abstract void PlayDamageAnimation();
@@ -33,14 +33,14 @@ namespace Units
             return transform.GetChild(0).GetComponent<SpriteRenderer>().sprite;
         }
 
-        public void SetBattleController(BattleController battleController)
+        public void SetBattleController(BattleLogicController battleLogicController)
         {
-            this.battleController = battleController;
+            this.battleLogicController = battleLogicController;
         }
 
         private void Die()
         {
-            battleController.NotifyDeath(gameObject.GetComponent<Unit>());
+            battleLogicController.NotifyDeath(gameObject.GetComponent<Unit>());
             PlayDeathAnimation();
             Invoke("DestroyInstance", 1f);
         }

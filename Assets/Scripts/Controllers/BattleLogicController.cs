@@ -5,7 +5,7 @@ using Utils;
 
 namespace Controllers
 {
-    public class BattleController : MonoBehaviour
+    public class BattleLogicController : MonoBehaviour
     {
         [SerializeField] private int allEnemyUnitsCount;
         [SerializeField] private int allPlayerUnitsCount;

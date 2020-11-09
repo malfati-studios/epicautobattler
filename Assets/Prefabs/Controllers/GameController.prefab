@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingConfiguration: {fileID: 11400000, guid: ac8826b79080f9a41a6b669f50a30387, type: 2}
+  battleLogicControllerPrefab: {fileID: 1733040622417261561, guid: c1dda97d9ee803a478fcd982c060d098, type: 3}
+  battleUIControllerPrefab: {fileID: 8864983057032818113, guid: 0adad07cb68d146498c523476f364603, type: 3}
   currentLvl: 0
   currentCredits: 0
-  battleControllerPrefab: {fileID: 1733040622417261561, guid: c1dda97d9ee803a478fcd982c060d098, type: 3}
-  battleUIControllerPrefab: {fileID: 8864983057032818113, guid: 0adad07cb68d146498c523476f364603, type: 3}

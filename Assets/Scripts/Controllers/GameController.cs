@@ -11,9 +11,9 @@ namespace Controllers
 
         [SerializeField] private StartingConfiguration startingConfiguration;
 
-        [SerializeField] private GameObject battleControllerPrefab;
+        [SerializeField] private GameObject battleLogicControllerPrefab;
         [SerializeField] private GameObject battleUIControllerPrefab;
-        private BattleController currentBattleController;
+        private BattleLogicController currentBattleLogicController;
         private BattleUIController currentBattleUiController;
 
         [SerializeField] private int currentLvl = 0;
@@ -39,22 +39,22 @@ namespace Controllers
             SceneController.instance.LoadSceneWithTransition(mapLvl + 1);
         }
 
-        public BattleController GetCurrentBattleController()
+        public BattleLogicController GetCurrentBattleController()
         {
-            return currentBattleController;
+            return currentBattleLogicController;
         }
 
         private void SetUpNewBattle()
         {
-            BattleController battleController = Instantiate(battleControllerPrefab).GetComponent<BattleController>();
+            BattleLogicController battleLogicController = Instantiate(battleLogicControllerPrefab).GetComponent<BattleLogicController>();
             BattleUIController battleUiController =
                 Instantiate(battleUIControllerPrefab).GetComponent<BattleUIController>();
 
-            currentBattleController = battleController;
+            currentBattleLogicController = battleLogicController;
             currentBattleUiController = battleUiController;
 
-            battleUiController.Initialize(currentBattleController, unitCredits);
-            battleController.Initialize(currentBattleUiController, unitCredits);
+            battleUiController.Initialize(currentBattleLogicController, unitCredits);
+            battleLogicController.Initialize(currentBattleUiController, unitCredits);
         }
 
 

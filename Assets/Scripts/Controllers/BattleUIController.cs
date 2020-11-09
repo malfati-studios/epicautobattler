@@ -17,9 +17,9 @@ namespace Controllers
         [SerializeField] private GameObject footmanPrefab;
         [SerializeField] private GameObject healerPrefab;
 
-        private BattleController battleController;
+        private BattleLogicController battleLogicController;
 
-        public void Initialize(BattleController battleController, Dictionary<UnitType, int> unitCredits)
+        public void Initialize(BattleLogicController battleLogicController, Dictionary<UnitType, int> unitCredits)
         {
             playerBar = GameObject.FindGameObjectWithTag("PlayerBar").GetComponent<ArmyBar>();
             enemyBar = GameObject.FindGameObjectWithTag("EnemyBar").GetComponent<ArmyBar>();
@@ -37,7 +37,7 @@ namespace Controllers
 
             startBattleButton.buttonListeners += OnStartBattleButtonClick;
 
-            this.battleController = battleController;
+            this.battleLogicController = battleLogicController;
         }
 
         // ReSharper disable once InconsistentNaming
@@ -50,12 +50,12 @@ namespace Controllers
 
         private void OnButtonClick(Unit unit)
         {
-            battleController.NotifyNewUnit(unit);
+            battleLogicController.NotifyNewUnit(unit);
         }
 
         private void OnStartBattleButtonClick(bool boolean)
         {
-            battleController.StartBattle();
+            battleLogicController.StartBattle();
         }
     }
 }

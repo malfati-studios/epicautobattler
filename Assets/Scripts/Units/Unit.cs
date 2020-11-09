@@ -84,8 +84,8 @@ namespace Units
             if (!target)
             {
                 target = IsSupportClass()
-                    ? battleController.GetNearestAlly(this)
-                    : battleController.GetNearestEnemy(this);
+                    ? battleLogicController.GetNearestAlly(this)
+                    : battleLogicController.GetNearestEnemy(this);
             }
         }
 
