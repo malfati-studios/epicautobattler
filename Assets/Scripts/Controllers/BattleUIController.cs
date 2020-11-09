@@ -6,17 +6,28 @@ using UnityEngine;
 namespace Controllers
 {
     // ReSharper disable once InconsistentNaming
-    public class LevelUIController : MonoBehaviour
+    public class BattleUIController : MonoBehaviour
     {
-        public static LevelUIController instance;
-        
         [SerializeField] private ArmyBar playerBar;
         [SerializeField] private ArmyBar enemyBar;
         [SerializeField] private UnitButton footmanButton;
         [SerializeField] private UnitButton healerButton;
+        [SerializeField] private StartBattleButton startBattleButton;
         
         [SerializeField] private GameObject footmanPrefab;
         [SerializeField] private GameObject healerPrefab;
+
+        private BattleController battleController;
+
+        public void Initialize(BattleController battleController)
+        {
+            playerBar = GameObject.FindGameObjectWithTag("PlayerBar").GetComponent<ArmyBar>();
+            enemyBar = GameObject.FindGameObjectWithTag("EnemyBar").GetComponent<ArmyBar>();
+            footmanButton = GameObject.FindGameObjectWithTag("FootmanButton").GetComponent<UnitButton>();
+            healerButton = GameObject.FindGameObjectWithTag("HealerButton").GetComponent<UnitButton>();
+            startBattleButton = GameObject.FindGameObjectWithTag("StartBattleButton").GetComponent<StartBattleButton>();
+            this.battleController = battleController;
+        }
         
         // ReSharper disable once InconsistentNaming
         public void RefreshArmyBarsUI(int alivePlayerUnitsCount, int allPlayerUnitsCount, int aliveEnemyUnitsCount, int allEnemyUnitsCount)
@@ -34,40 +45,19 @@ namespace Controllers
             healerButton.buttonListeners += OnButtonClick;
             healerButton.SetUnitCount(currentUnitCredits[UnitType.Healer]);
             healerButton.SetUnitPrefab(healerPrefab);
+
+            startBattleButton.buttonListeners += OnStartBattleButtonClick;
         }
         
         private void OnButtonClick(Unit unit)
         {
-            BattleController.instance.NotifyNewUnit(unit);
-        }
-
-        #region UNITY_CALLS
-        private void Start()
-        {
-            playerBar = GameObject.FindGameObjectWithTag("PlayerBar").GetComponent<ArmyBar>();
-            enemyBar = GameObject.FindGameObjectWithTag("EnemyBar").GetComponent<ArmyBar>();
-            footmanButton = GameObject.FindGameObjectWithTag("FootmanButton").GetComponent<UnitButton>();
-            healerButton = GameObject.FindGameObjectWithTag("HealerButton").GetComponent<UnitButton>();
-        }
-
-        private void Awake()
-        {
-            Initialize();
-        }
-
-        private void Initialize()
-        {
-            if (instance == null)
-            {
-                instance = this;
-                DontDestroyOnLoad(gameObject);
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
+            battleController.NotifyNewUnit(unit);
         }
         
-        #endregion
+        private void OnStartBattleButtonClick(bool boolean)
+        {
+            battleController.StartBattle();
+        }
+
     }
 }

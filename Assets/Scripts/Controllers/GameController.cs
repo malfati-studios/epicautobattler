@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Data;
 using Units;
 using UnityEngine;
@@ -13,6 +14,13 @@ namespace Controllers
         [SerializeField] private int currentLvl = 0;
         [SerializeField] private int currentCredits;
         [SerializeField] private Dictionary<UnitType, int> unitCredits;
+        [SerializeField] private GameObject battleControllerPrefab;
+        [SerializeField] private GameObject battleUIControllerPrefab;
+
+        private BattleController currentBattleController;
+        private BattleUIController currentBattleUiController;
+
+        private bool waitingForBattleLevelLoad;
 
         public void StartGame()
         {
@@ -24,30 +32,42 @@ namespace Controllers
             SceneController.instance.LoadSceneInstant(1);
         }
 
-        public void StartLevel1()
-        {
-            SceneController.instance.LoadSceneWithTransition(2);
-            currentLvl = 1;
-        }
-        
-        public void StartLevel2()
-        {
-            SceneController.instance.LoadSceneWithTransition(3);
-            currentLvl = 2;
-
-        }
-        
-        public void StartLevel3()
-        {
-            SceneController.instance.LoadSceneWithTransition(4);
-            currentLvl = 3;
-        }
-        
-        
         public void OnMapButtonPressed(int mapLvl)
         {
             currentLvl = mapLvl;
-            SceneController.instance.LoadSceneWithTransition(mapLvl+1);
+            waitingForBattleLevelLoad = true;
+            SceneController.instance.LoadSceneWithTransition(mapLvl + 1);
+        }
+
+        public BattleController GetCurrentBattleController()
+        {
+            return currentBattleController;
+        }
+
+        private void SetUpNewBattle()
+        {
+            BattleController battleController = Instantiate(battleControllerPrefab).GetComponent<BattleController>();
+            BattleUIController battleUiController =
+                Instantiate(battleUIControllerPrefab).GetComponent<BattleUIController>();
+
+            currentBattleController = battleController;
+            currentBattleUiController = battleUiController;
+
+            battleUiController.Initialize(currentBattleController);
+            battleController.Initialize(currentBattleUiController);
+        }
+
+        private void Start()
+        {
+            SceneController.instance.levelLoaded += OnLevelLoaded;
+        }
+
+        private void OnLevelLoaded(bool boolean)
+        {
+            if (waitingForBattleLevelLoad)
+            {
+                SetUpNewBattle();
+            }
         }
 
         private void Awake()
@@ -67,6 +87,5 @@ namespace Controllers
                 Destroy(gameObject);
             }
         }
-
     }
 }

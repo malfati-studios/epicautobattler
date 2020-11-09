@@ -7,8 +7,6 @@ namespace Controllers
 {
     public class BattleController : MonoBehaviour
     {
-        public static BattleController instance;
-
         [SerializeField] private int allEnemyUnitsCount;
         [SerializeField] private int allPlayerUnitsCount;
 
@@ -16,6 +14,19 @@ namespace Controllers
         [SerializeField] private List<Unit> aliveEnemyUnits = new List<Unit>();
 
         [SerializeField] private Dictionary<UnitType, int> currentUnitCredits;
+
+        private BattleUIController battleUIController;
+
+        public void Initialize(BattleUIController battleUIController)
+        {
+            currentUnitCredits = new Dictionary<UnitType, int>();
+            currentUnitCredits[UnitType.Footman] = 10;
+            currentUnitCredits[UnitType.Healer] = 10;
+            this.battleUIController = battleUIController;
+            this.battleUIController.ConfigureButtons(currentUnitCredits);
+            ScanUnits();
+            StartBattle();
+        }
 
         public Unit GetNearestAlly(Unit unit)
         {
@@ -48,7 +59,7 @@ namespace Controllers
                 aliveEnemyUnits.Remove(go.GetComponent<Unit>());
             }
 
-            LevelUIController.instance.RefreshArmyBarsUI(alivePlayerUnits.Count, allPlayerUnitsCount,
+            battleUIController.RefreshArmyBarsUI(alivePlayerUnits.Count, allPlayerUnitsCount,
                 aliveEnemyUnits.Count, allEnemyUnitsCount);
         }
 
@@ -58,23 +69,23 @@ namespace Controllers
             allPlayerUnitsCount++;
             currentUnitCredits[u.type] = currentUnitCredits[u.type] - 1;
 
-            LevelUIController.instance.RefreshArmyBarsUI(alivePlayerUnits.Count, allPlayerUnitsCount,
+            battleUIController.RefreshArmyBarsUI(alivePlayerUnits.Count, allPlayerUnitsCount,
                 aliveEnemyUnits.Count, allEnemyUnitsCount);
         }
 
-        private void Awake()
+        public void StartBattle()
         {
-            Initialize();
-        }
+            foreach (var aliveEnemyUnit in aliveEnemyUnits)
+            {    
+                aliveEnemyUnit.SetBattleController(this);
+                aliveEnemyUnit.SearchForTarget();
+            }
 
-        private void Start()
-        {
-            currentUnitCredits = new Dictionary<UnitType, int>();
-            currentUnitCredits[UnitType.Footman] = 10;
-            currentUnitCredits[UnitType.Healer] = 10;
-            LevelUIController.instance.ConfigureButtons(currentUnitCredits);
-            ScanUnits();
-            StartBattle();
+            foreach (var alivePlayerUnit in alivePlayerUnits)
+            {
+                alivePlayerUnit.SetBattleController(this);
+                alivePlayerUnit.SearchForTarget();
+            }
         }
 
         private void ScanUnits()
@@ -95,32 +106,6 @@ namespace Controllers
 
             allEnemyUnitsCount = aliveEnemyUnits.Count;
             allPlayerUnitsCount = alivePlayerUnits.Count;
-        }
-
-        private void StartBattle()
-        {
-            foreach (var aliveEnemyUnit in aliveEnemyUnits)
-            {
-                aliveEnemyUnit.SearchForTarget();
-            }
-
-            foreach (var alivePlayerUnit in alivePlayerUnits)
-            {
-                alivePlayerUnit.SearchForTarget();
-            }
-        }
-
-        private void Initialize()
-        {
-            if (instance == null)
-            {
-                instance = this;
-                DontDestroyOnLoad(gameObject);
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
         }
     }
 }

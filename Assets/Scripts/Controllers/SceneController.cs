@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.SceneManagement; //para trabajar con cambios de escenas
 
 //usamos namespaces para organizar mejor nuestro codigo. Respetamos la estructura que definimos aca en la carpeta de Scripts.
@@ -9,6 +10,7 @@ namespace Controllers
         #region EXPOSED_FIELDS
         [SerializeField] private CanvasGroup canvasGroup = null; //componente que nos permite modificar propiedades generales de todos los elementos child de tipo UI.
         [SerializeField] private float transitionTime = 1.0f;
+        public Action<bool> levelLoaded;
         #endregion
 
         #region PRIVATE_FIELDS
@@ -47,6 +49,7 @@ namespace Controllers
             //Guardamos la escena proxima y abrimos la transicion
             nextScene = sceneIndex;
             SceneManager.LoadScene(nextScene);
+            levelLoaded.Invoke(true);
         }
         public void LoadSceneWithTransition(int sceneIndex)
         {
@@ -140,6 +143,7 @@ namespace Controllers
             //si el alpha esta en 0 termino la transicion, desbloqueamos la interaccion y ponemos el estado en idle para arrancar devuelta.
             canvasGroup.blocksRaycasts = false;
             state = STATE.IDLE;
+            levelLoaded.Invoke(true);
         }
         #endregion
     }

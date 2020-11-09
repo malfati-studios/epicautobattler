@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 941821403002608097}
   m_Layer: 0
   m_Name: GameController
-  m_TagString: Untagged
+  m_TagString: GameController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -46,3 +46,5 @@ MonoBehaviour:
   startingConfiguration: {fileID: 11400000, guid: ac8826b79080f9a41a6b669f50a30387, type: 2}
   currentLvl: 0
   currentCredits: 0
+  battleControllerPrefab: {fileID: 1733040622417261561, guid: c1dda97d9ee803a478fcd982c060d098, type: 3}
+  battleUIControllerPrefab: {fileID: 8864983057032818113, guid: 0adad07cb68d146498c523476f364603, type: 3}
