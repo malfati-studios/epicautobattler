@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Data;
 using Units;
 using UnityEngine;
@@ -11,14 +10,15 @@ namespace Controllers
         public static GameController instance;
 
         [SerializeField] private StartingConfiguration startingConfiguration;
+
+        [SerializeField] private GameObject battleControllerPrefab;
+        [SerializeField] private GameObject battleUIControllerPrefab;
+        private BattleController currentBattleController;
+        private BattleUIController currentBattleUiController;
+
         [SerializeField] private int currentLvl = 0;
         [SerializeField] private int currentCredits;
         [SerializeField] private Dictionary<UnitType, int> unitCredits;
-        [SerializeField] private GameObject battleControllerPrefab;
-        [SerializeField] private GameObject battleUIControllerPrefab;
-
-        private BattleController currentBattleController;
-        private BattleUIController currentBattleUiController;
 
         private bool waitingForBattleLevelLoad;
 
@@ -53,14 +53,10 @@ namespace Controllers
             currentBattleController = battleController;
             currentBattleUiController = battleUiController;
 
-            battleUiController.Initialize(currentBattleController);
-            battleController.Initialize(currentBattleUiController);
+            battleUiController.Initialize(currentBattleController, unitCredits);
+            battleController.Initialize(currentBattleUiController, unitCredits);
         }
 
-        private void Start()
-        {
-            SceneController.instance.levelLoaded += OnLevelLoaded;
-        }
 
         private void OnLevelLoaded(bool boolean)
         {
@@ -72,11 +68,6 @@ namespace Controllers
 
         private void Awake()
         {
-            Initialize();
-        }
-
-        private void Initialize()
-        {
             if (instance == null)
             {
                 instance = this;
@@ -86,6 +77,11 @@ namespace Controllers
             {
                 Destroy(gameObject);
             }
+        }
+
+        private void Start()
+        {
+            SceneController.instance.levelLoaded += OnLevelLoaded;
         }
     }
 }

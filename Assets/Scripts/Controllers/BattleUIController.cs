@@ -13,51 +13,49 @@ namespace Controllers
         [SerializeField] private UnitButton footmanButton;
         [SerializeField] private UnitButton healerButton;
         [SerializeField] private StartBattleButton startBattleButton;
-        
+
         [SerializeField] private GameObject footmanPrefab;
         [SerializeField] private GameObject healerPrefab;
 
         private BattleController battleController;
 
-        public void Initialize(BattleController battleController)
+        public void Initialize(BattleController battleController, Dictionary<UnitType, int> unitCredits)
         {
             playerBar = GameObject.FindGameObjectWithTag("PlayerBar").GetComponent<ArmyBar>();
             enemyBar = GameObject.FindGameObjectWithTag("EnemyBar").GetComponent<ArmyBar>();
             footmanButton = GameObject.FindGameObjectWithTag("FootmanButton").GetComponent<UnitButton>();
             healerButton = GameObject.FindGameObjectWithTag("HealerButton").GetComponent<UnitButton>();
             startBattleButton = GameObject.FindGameObjectWithTag("StartBattleButton").GetComponent<StartBattleButton>();
-            this.battleController = battleController;
-        }
-        
-        // ReSharper disable once InconsistentNaming
-        public void RefreshArmyBarsUI(int alivePlayerUnitsCount, int allPlayerUnitsCount, int aliveEnemyUnitsCount, int allEnemyUnitsCount)
-        {
-            playerBar.UpdateBar(alivePlayerUnitsCount, allPlayerUnitsCount);
-            enemyBar.UpdateBar( aliveEnemyUnitsCount, allEnemyUnitsCount);
-        }
-        
-        public void ConfigureButtons(Dictionary<UnitType, int> currentUnitCredits)
-        {
+
             footmanButton.buttonListeners += OnButtonClick;
-            footmanButton.SetUnitCount(currentUnitCredits[UnitType.Footman]);
+            footmanButton.SetUnitCount(unitCredits[UnitType.Footman]);
             footmanButton.SetUnitPrefab(footmanPrefab);
 
             healerButton.buttonListeners += OnButtonClick;
-            healerButton.SetUnitCount(currentUnitCredits[UnitType.Healer]);
+            healerButton.SetUnitCount(unitCredits[UnitType.Healer]);
             healerButton.SetUnitPrefab(healerPrefab);
 
             startBattleButton.buttonListeners += OnStartBattleButtonClick;
+
+            this.battleController = battleController;
         }
-        
+
+        // ReSharper disable once InconsistentNaming
+        public void RefreshArmyBarsUI(int alivePlayerUnitsCount, int allPlayerUnitsCount, int aliveEnemyUnitsCount,
+            int allEnemyUnitsCount)
+        {
+            playerBar.UpdateBar(alivePlayerUnitsCount, allPlayerUnitsCount);
+            enemyBar.UpdateBar(aliveEnemyUnitsCount, allEnemyUnitsCount);
+        }
+
         private void OnButtonClick(Unit unit)
         {
             battleController.NotifyNewUnit(unit);
         }
-        
+
         private void OnStartBattleButtonClick(bool boolean)
         {
             battleController.StartBattle();
         }
-
     }
 }

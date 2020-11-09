@@ -17,13 +17,12 @@ namespace Controllers
 
         private BattleUIController battleUIController;
 
-        public void Initialize(BattleUIController battleUIController)
+        public void Initialize(BattleUIController battleUIController, Dictionary<UnitType, int> unitCredits)
         {
             currentUnitCredits = new Dictionary<UnitType, int>();
-            currentUnitCredits[UnitType.Footman] = 10;
-            currentUnitCredits[UnitType.Healer] = 10;
+            currentUnitCredits[UnitType.Footman] = unitCredits[UnitType.Footman];
+            currentUnitCredits[UnitType.Healer] = unitCredits[UnitType.Healer];
             this.battleUIController = battleUIController;
-            this.battleUIController.ConfigureButtons(currentUnitCredits);
             ScanUnits();
             StartBattle();
         }
@@ -76,7 +75,7 @@ namespace Controllers
         public void StartBattle()
         {
             foreach (var aliveEnemyUnit in aliveEnemyUnits)
-            {    
+            {
                 aliveEnemyUnit.SetBattleController(this);
                 aliveEnemyUnit.SearchForTarget();
             }
