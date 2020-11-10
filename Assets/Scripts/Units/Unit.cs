@@ -25,7 +25,6 @@ namespace Units
         private void StopMovingAnimation()
         {
             animator.SetInteger(MovingAxis, 0);
-
         }
 
         protected virtual void Start()
@@ -88,7 +87,7 @@ namespace Units
                     : battleLogicController.GetNearestEnemy(this);
             }
         }
-
+        
         private void Move()
         {
             if (!move || !target || InRange())
