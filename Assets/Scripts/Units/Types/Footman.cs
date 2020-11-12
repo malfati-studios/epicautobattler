@@ -82,6 +82,9 @@ namespace Units.Types
                 transform.GetChild(0).localPosition = forwardVector2Lerper.CurrentValue;
                 if (forwardVector2Lerper.Reached)
                 {
+                    attackAnimationState = AttackAnimationState.NOT_PLAYING;
+                    DamageCallback();
+                    //The amount of time we want the footman to be on the enemy
                     Invoke("ResetAttackPosition", 0.3f);
                 }
             }
@@ -90,7 +93,6 @@ namespace Units.Types
         public void ResetAttackPosition()
         {
             transform.GetChild(0).localPosition = new Vector2(0, 0);
-            attackAnimationState = AttackAnimationState.NOT_PLAYING;
             animator.enabled = true;
         }
 
