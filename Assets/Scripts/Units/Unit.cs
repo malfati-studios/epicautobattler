@@ -1,105 +1,58 @@
-﻿using Controllers;
+﻿using System;
+using Controllers;
 using UnityEngine;
 
 namespace Units
 {
-    public abstract class Unit : GameEntity
+    public abstract class Unit : MonoBehaviour
     {
-        [SerializeField] public UnitType type;
-        [SerializeField] public Faction faction;
-        [SerializeField] public float speed;
-        [SerializeField] public float stopDistance;
-        [SerializeField] public Unit target;
-
-        private bool move = true;
-        private Animator animator;
-        private static readonly int MovingAxis = Animator.StringToHash("MovingAxis");
-
-        public abstract bool IsSupportClass();
-    
-        private void PlayMovingAnimation()
-        {
-            animator.SetInteger(MovingAxis, GetMovingAxis());
-        }
-
-        private void StopMovingAnimation()
-        {
-            animator.SetInteger(MovingAxis, 0);
-        }
-
-        protected virtual void Start()
-        {
-            animator = GetComponent<Animator>();
-        }
-
-        protected virtual void Update()
-        {
-            Move();
-        }
-
-        public void StartMoving()
-        {
-            move = true;
-        }
-
-        public void StopMoving()
-        {
-            move = false;
-        }
-
-        public void SetTarget(Unit target)
-        {
-            this.target = target;
-        }
-
-        public void ClearTarget()
-        {
-            target = null;
-        }
-
-        public bool HasTarget()
-        {
-            return target != null;
-        }
-
-        public bool InRange()
-        {
-            return (transform.position - target.transform.position).magnitude <= stopDistance;
-        }
-
-        public int GetMovingAxis()
-        {
-            if (InRange()) return 0;
-            if (target.transform.position.x > transform.position.x)
-            {
-                return 1;
-            }
-
-            return -1;
-        }
+        public Action<bool> deathListeners;
         
-        public void SearchForTarget()
-        {
-            if (!target)
-            {
-                target = IsSupportClass()
-                    ? battleLogicController.GetNearestAlly(this)
-                    : battleLogicController.GetNearestEnemy(this);
-            }
-        }
+        [SerializeField] public int HP;
+
+        private GameObject image;
+        protected BattleLogicController battleLogicController;
         
-        private void Move()
+        public abstract void PlayDeathAnimation();
+        public abstract void PlayDamageAnimation();
+        
+        public bool TakeDamage(int damage)
         {
-            if (!move || !target || InRange())
+            HP -= damage;
+            PlayDamageAnimation();
+            if (HP < 1)
             {
-                StopMovingAnimation();
-                return;
+                Die();
+                return true;
             }
-           
-            PlayMovingAnimation();
-            transform.position =
-                Vector3.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
+            return false;
         }
 
+        public Sprite GetSprite()
+        {
+            return GetImage().GetComponent<SpriteRenderer>().sprite;
+        }
+
+        public GameObject GetImage()
+        {
+            return transform.GetChild(0).gameObject;
+        }
+
+        public void SetBattleController(BattleLogicController battleLogicController)
+        {
+            this.battleLogicController = battleLogicController;
+        }
+
+        private void Die()
+        {
+            battleLogicController.NotifyDeath(gameObject.GetComponent<MovingUnit>());
+            PlayDeathAnimation();
+            Invoke("DestroyInstance", 1f);
+        }
+
+        private void DestroyInstance()
+        {
+            Destroy(gameObject);
+        }
     }
 }

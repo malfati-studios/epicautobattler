@@ -8,7 +8,7 @@ namespace UI
 {
     public class UnitButton : MonoBehaviour
     {
-        public Action<Unit> buttonListeners;
+        public Action<MovingUnit> buttonListeners;
         [SerializeField] private GameObject unitPrefab;
         [SerializeField] private int unitCount;
 
@@ -24,7 +24,7 @@ namespace UI
         public void SetUnitPrefab(GameObject prefab)
         {
             unitPrefab = prefab;
-            unitImage.sprite = prefab.GetComponent<Unit>().GetSprite();
+            unitImage.sprite = prefab.GetComponent<MovingUnit>().GetSprite();
             Color tmp = unitImage.color;
             tmp.a = 1f;
             unitImage.color = tmp;
@@ -34,7 +34,7 @@ namespace UI
         {
             if (buttonListeners != null)
             {
-                buttonListeners.Invoke(unitPrefab.GetComponent<Unit>());
+                buttonListeners.Invoke(unitPrefab.GetComponent<MovingUnit>());
             }
             unitCount--;
             RefreshCount();

@@ -10,8 +10,8 @@ namespace Controllers
         [SerializeField] private int allEnemyUnitsCount;
         [SerializeField] private int allPlayerUnitsCount;
 
-        [SerializeField] private List<Unit> alivePlayerUnits = new List<Unit>();
-        [SerializeField] private List<Unit> aliveEnemyUnits = new List<Unit>();
+        [SerializeField] private List<MovingUnit> alivePlayerUnits = new List<MovingUnit>();
+        [SerializeField] private List<MovingUnit> aliveEnemyUnits = new List<MovingUnit>();
 
         [SerializeField] private Dictionary<UnitType, int> currentUnitCredits;
 
@@ -26,42 +26,42 @@ namespace Controllers
             ScanUnits();
         }
 
-        public Unit GetNearestAlly(Unit unit)
+        public MovingUnit GetNearestAlly(MovingUnit movingUnit)
         {
-            if (unit.faction == Faction.PLAYER)
+            if (movingUnit.faction == Faction.PLAYER)
             {
-                return UnitDistanceHelper.GetClosestUnit(unit, alivePlayerUnits);
+                return UnitDistanceHelper.GetClosestUnit(movingUnit, alivePlayerUnits);
             }
 
-            return UnitDistanceHelper.GetClosestUnit(unit, aliveEnemyUnits);
+            return UnitDistanceHelper.GetClosestUnit(movingUnit, aliveEnemyUnits);
         }
 
-        public Unit GetNearestEnemy(Unit unit)
+        public MovingUnit GetNearestEnemy(MovingUnit movingUnit)
         {
-            if (unit.faction == Faction.PLAYER)
+            if (movingUnit.faction == Faction.PLAYER)
             {
-                return UnitDistanceHelper.GetClosestUnit(unit, aliveEnemyUnits);
+                return UnitDistanceHelper.GetClosestUnit(movingUnit, aliveEnemyUnits);
             }
 
-            return UnitDistanceHelper.GetClosestUnit(unit, alivePlayerUnits);
+            return UnitDistanceHelper.GetClosestUnit(movingUnit, alivePlayerUnits);
         }
 
-        public void NotifyDeath(Unit go)
+        public void NotifyDeath(MovingUnit go)
         {
             if (go.faction == Faction.PLAYER)
             {
-                alivePlayerUnits.Remove(go.GetComponent<Unit>());
+                alivePlayerUnits.Remove(go.GetComponent<MovingUnit>());
             }
             else
             {
-                aliveEnemyUnits.Remove(go.GetComponent<Unit>());
+                aliveEnemyUnits.Remove(go.GetComponent<MovingUnit>());
             }
 
             battleUIController.RefreshArmyBarsUI(alivePlayerUnits.Count, allPlayerUnitsCount,
                 aliveEnemyUnits.Count, allEnemyUnitsCount);
         }
 
-        public void NotifyNewUnit(Unit u)
+        public void NotifyNewUnit(MovingUnit u)
         {
             alivePlayerUnits.Add(u);
             allPlayerUnitsCount++;
@@ -91,7 +91,7 @@ namespace Controllers
             GameObject[] units = GameObject.FindGameObjectsWithTag("Unit");
             foreach (var goUnit in units)
             {
-                Unit u = goUnit.GetComponent<Unit>();
+                MovingUnit u = goUnit.GetComponent<MovingUnit>();
                 if (u.faction == Faction.PLAYER)
                 {
                     alivePlayerUnits.Add(u);

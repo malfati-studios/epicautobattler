@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Units
 {
-    public abstract class SupportUnit : Unit
+    public abstract class SupportMovingUnit : MovingUnit
     {
         [SerializeField] public int millisBetweenSupports;
 

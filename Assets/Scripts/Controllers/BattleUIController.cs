@@ -48,9 +48,9 @@ namespace Controllers
             enemyBar.UpdateBar(aliveEnemyUnitsCount, allEnemyUnitsCount);
         }
 
-        private void OnButtonClick(Unit unit)
+        private void OnButtonClick(MovingUnit movingUnit)
         {
-            battleLogicController.NotifyNewUnit(unit);
+            battleLogicController.NotifyNewUnit(movingUnit);
         }
 
         private void OnStartBattleButtonClick(bool boolean)

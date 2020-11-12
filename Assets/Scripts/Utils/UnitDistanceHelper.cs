@@ -5,36 +5,36 @@ namespace Utils
 {
     public class UnitDistanceHelper
     {
-        public static Unit GetClosestUnit(Unit unit, List<Unit> units)
+        public static MovingUnit GetClosestUnit(MovingUnit movingUnit, List<MovingUnit> units)
         {
             if (units.Count == 0) return null;
 
-            Unit closestOtherUnit = null;
+            MovingUnit closestOtherMovingUnit = null;
             float closestDistance = float.PositiveInfinity;
 
             foreach (var otherUnit in units)
             {
-                if (AreTheSameUnit(unit, otherUnit)) continue;
+                if (AreTheSameUnit(movingUnit, otherUnit)) continue;
                 
-                float currentDistance = GetDistanceToUnit(unit, otherUnit);
+                float currentDistance = GetDistanceToUnit(movingUnit, otherUnit);
                 if (currentDistance < closestDistance)
                 {
-                    closestOtherUnit = otherUnit;
+                    closestOtherMovingUnit = otherUnit;
                     closestDistance = currentDistance;
                 }
             }
 
-            return closestOtherUnit;
+            return closestOtherMovingUnit;
         }
 
-        private static float GetDistanceToUnit(Unit a, Unit b)
+        private static float GetDistanceToUnit(MovingUnit a, MovingUnit b)
         {
             return (a.transform.position - b.transform.position).magnitude;
         }
 
-        private static bool AreTheSameUnit(Unit unit, Unit otherUnit)
+        private static bool AreTheSameUnit(MovingUnit movingUnit, MovingUnit otherMovingUnit)
         {
-            return unit.gameObject.GetInstanceID() == otherUnit.gameObject.GetInstanceID();
+            return movingUnit.gameObject.GetInstanceID() == otherMovingUnit.gameObject.GetInstanceID();
         }
     }
 }

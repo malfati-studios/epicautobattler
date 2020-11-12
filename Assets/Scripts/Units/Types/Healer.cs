@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Units.Types
 {
-    public class Healer : SupportUnit
+    public class Healer : SupportMovingUnit
     {
         [SerializeField] private UnitStats stats;
         public override void PlayDeathAnimation()

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Units
 {
-    public abstract class AttackingUnit : Unit
+    public abstract class AttackingMovingUnit : MovingUnit
     {
         [SerializeField] public int attack;
         [SerializeField] public int millisBetweenAttacks;
@@ -16,7 +16,7 @@ namespace Units
         {
             lastAttackTime = DateTime.Now;
             PlayAttackAnimation();
-            bool died = target.GetComponent<GameEntity>().TakeDamage(attack);
+            bool died = target.GetComponent<Unit>().TakeDamage(attack);
             if (died)
             {
                 ClearTarget();
