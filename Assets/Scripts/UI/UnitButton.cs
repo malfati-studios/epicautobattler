@@ -8,7 +8,7 @@ namespace UI
 {
     public class UnitButton : MonoBehaviour
     {
-        public Action<MovingUnit> buttonListeners;
+        public Action<GameObject> buttonListeners;
         [SerializeField] private GameObject unitPrefab;
         [SerializeField] private int unitCount;
 
@@ -34,7 +34,7 @@ namespace UI
         {
             if (buttonListeners != null)
             {
-                buttonListeners.Invoke(unitPrefab.GetComponent<MovingUnit>());
+                buttonListeners.Invoke(unitPrefab);
             }
             unitCount--;
             RefreshCount();
