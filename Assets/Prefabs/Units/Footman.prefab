@@ -45,9 +45,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99f45ea50ac637742a9a0b70df1c0474, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HP: 120
+  faction: 0
   type: 0
-  faction: 1
+  HP: 120
   speed: 0.5
   stopDistance: 0.2
   target: {fileID: 0}
