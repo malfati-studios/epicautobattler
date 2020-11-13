@@ -14,7 +14,7 @@ namespace UI
 
         private Image unitImage;
         private TextMeshProUGUI unitCountTxt;
-      
+
         public void SetUnitCount(int count)
         {
             unitCount = count;
@@ -36,23 +36,27 @@ namespace UI
             {
                 buttonListeners.Invoke(unitPrefab);
             }
+        }
+
+        private void Awake()
+        {
+            unitImage = gameObject.transform.GetChild(0).GetComponent<Image>();
+            unitCountTxt = gameObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
+        }
+
+        private void RefreshCount()
+        {
+            unitCountTxt.text = unitCount.ToString();
+        }
+
+        public void NotifyUnitCreated()
+        {
             unitCount--;
             RefreshCount();
             if (unitCount == 0)
             {
                 gameObject.GetComponent<Button>().interactable = false;
             }
-        }
-        
-        private void Awake()
-        {
-           unitImage = gameObject.transform.GetChild(0).GetComponent<Image>();
-           unitCountTxt = gameObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
-        }
-
-        private void RefreshCount()
-        {
-          unitCountTxt.text = unitCount.ToString();
         }
     }
 }

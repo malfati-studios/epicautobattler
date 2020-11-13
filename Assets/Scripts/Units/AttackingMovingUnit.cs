@@ -21,10 +21,9 @@ namespace Units
         //This functions needs to be called in the point of the animation that you want to make the damage
         protected void DamageCallback()
         {
-            bool died = target.GetComponent<Unit>().TakeDamage(attack);
-            if (died)
+            if (target != null)
             {
-                ClearTarget();
+                target.GetComponent<Unit>().TakeDamage(attack);
             }
         }
 

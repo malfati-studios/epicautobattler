@@ -1,15 +1,12 @@
-﻿using Controllers;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Units
 {
     public abstract class MovingUnit : Unit
     {
-        [SerializeField] public UnitType type;
-        [SerializeField] public Faction faction;
         [SerializeField] public float speed;
         [SerializeField] public float stopDistance;
-        [SerializeField] public MovingUnit target;
+        [SerializeField] public Unit target;
 
         private bool move = true;
         protected Animator animator;
@@ -85,9 +82,19 @@ namespace Units
                 target = IsSupportClass()
                     ? battleLogicController.GetNearestAlly(this)
                     : battleLogicController.GetNearestEnemy(this);
+
+                if (target != null)
+                {
+                    target.deathListeners += OnTargetDeath;
+                }
             }
         }
-        
+
+        private void OnTargetDeath(bool obj)
+        {
+            ClearTarget();
+        }
+
         private void Move()
         {
             if (!move || !target || InRange())

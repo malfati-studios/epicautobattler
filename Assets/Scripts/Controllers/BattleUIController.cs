@@ -23,6 +23,11 @@ namespace Controllers
 
         public void Initialize(BattleLogicController battleLogicController, Dictionary<UnitType, int> unitCredits)
         {
+            var unitCreatorGO = Instantiate(unitCreatorPrefab);
+            unitCreator = unitCreatorGO.GetComponent<UnitCreator>();
+            unitCreator.Initialize();
+            unitCreator.unitCreateEvent += OnUnitCreation;
+
             playerBar = GameObject.FindGameObjectWithTag("PlayerBar").GetComponent<ArmyBar>();
             enemyBar = GameObject.FindGameObjectWithTag("EnemyBar").GetComponent<ArmyBar>();
             footmanButton = GameObject.FindGameObjectWithTag("FootmanButton").GetComponent<UnitButton>();
@@ -39,14 +44,9 @@ namespace Controllers
 
             startBattleButton.buttonListeners += OnStartBattleButtonClick;
 
-            var unitCreatorGO = Instantiate(unitCreatorPrefab);
-            unitCreator = unitCreatorGO.GetComponent<UnitCreator>();
-            unitCreator.Initialize();
             this.battleLogicController = battleLogicController;
-            
         }
 
-        // ReSharper disable once InconsistentNaming
         public void RefreshArmyBarsUI(int alivePlayerUnitsCount, int allPlayerUnitsCount, int aliveEnemyUnitsCount,
             int allEnemyUnitsCount)
         {
@@ -54,10 +54,31 @@ namespace Controllers
             enemyBar.UpdateBar(aliveEnemyUnitsCount, allEnemyUnitsCount);
         }
 
+        private void OnUnitCreation(Unit unit)
+        {
+            int creditsLeft = battleLogicController.NotifyNewUnitAndReturnCreditsLeft(unit);
+            switch (unit.type)
+            {
+                case UnitType.Footman:
+                    footmanButton.NotifyUnitCreated();
+                    break;
+                case UnitType.Healer:
+                    healerButton.NotifyUnitCreated();
+                    break;
+                case UnitType.Archer:
+                    break;
+            }
+
+            if (creditsLeft == 0)
+            {
+                unitCreator.DisableCreation();
+            }
+        }
+
+        // ReSharper disable once InconsistentNaming
         private void OnButtonClick(GameObject unitSelected)
         {
             unitCreator.ButtonClicked(unitSelected);
-            //battleLogicController.NotifyNewUnit(unitSelected.GetComponent<MovingUnit>());
         }
 
         private void OnStartBattleButtonClick(bool boolean)

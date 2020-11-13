@@ -10,10 +10,12 @@ namespace Controllers
         [SerializeField] private int allEnemyUnitsCount;
         [SerializeField] private int allPlayerUnitsCount;
 
-        [SerializeField] private List<MovingUnit> alivePlayerUnits = new List<MovingUnit>();
-        [SerializeField] private List<MovingUnit> aliveEnemyUnits = new List<MovingUnit>();
+        [SerializeField] private List<Unit> alivePlayerUnits = new List<Unit>();
+        [SerializeField] private List<Unit> aliveEnemyUnits = new List<Unit>();
 
         [SerializeField] private Dictionary<UnitType, int> currentUnitCredits;
+
+        private bool battleStarted;
 
         private BattleUIController battleUIController;
 
@@ -26,24 +28,24 @@ namespace Controllers
             ScanUnits();
         }
 
-        public MovingUnit GetNearestAlly(MovingUnit movingUnit)
+        public Unit GetNearestAlly(Unit movingUnit)
         {
             if (movingUnit.faction == Faction.PLAYER)
             {
-                return UnitDistanceHelper.GetClosestUnit(movingUnit, alivePlayerUnits);
+                return UnitTargetHelper.GetClosestUnit(movingUnit, alivePlayerUnits);
             }
 
-            return UnitDistanceHelper.GetClosestUnit(movingUnit, aliveEnemyUnits);
+            return UnitTargetHelper.GetClosestUnit(movingUnit, aliveEnemyUnits);
         }
 
-        public MovingUnit GetNearestEnemy(MovingUnit movingUnit)
+        public Unit GetNearestEnemy(Unit movingUnit)
         {
             if (movingUnit.faction == Faction.PLAYER)
             {
-                return UnitDistanceHelper.GetClosestUnit(movingUnit, aliveEnemyUnits);
+                return UnitTargetHelper.GetClosestUnit(movingUnit, aliveEnemyUnits);
             }
 
-            return UnitDistanceHelper.GetClosestUnit(movingUnit, alivePlayerUnits);
+            return UnitTargetHelper.GetClosestUnit(movingUnit, alivePlayerUnits);
         }
 
         public void NotifyDeath(MovingUnit go)
@@ -61,7 +63,7 @@ namespace Controllers
                 aliveEnemyUnits.Count, allEnemyUnitsCount);
         }
 
-        public void NotifyNewUnit(MovingUnit u)
+        public int NotifyNewUnitAndReturnCreditsLeft(Unit u)
         {
             alivePlayerUnits.Add(u);
             allPlayerUnitsCount++;
@@ -69,20 +71,32 @@ namespace Controllers
 
             battleUIController.RefreshArmyBarsUI(alivePlayerUnits.Count, allPlayerUnitsCount,
                 aliveEnemyUnits.Count, allEnemyUnitsCount);
+
+            InitializeUnit(u);
+
+            return currentUnitCredits[u.type];
         }
 
         public void StartBattle()
         {
+            battleStarted = true;
             foreach (var aliveEnemyUnit in aliveEnemyUnits)
             {
-                aliveEnemyUnit.SetBattleController(this);
-                aliveEnemyUnit.SearchForTarget();
+                InitializeUnit(aliveEnemyUnit);
             }
 
             foreach (var alivePlayerUnit in alivePlayerUnits)
             {
-                alivePlayerUnit.SetBattleController(this);
-                alivePlayerUnit.SearchForTarget();
+                InitializeUnit(alivePlayerUnit);
+            }
+        }
+
+        private void InitializeUnit(Unit u)
+        {
+            u.SetBattleController(this);
+            if (battleStarted && UnitTargetHelper.CanSearchForTarget(u))
+            {
+                ((MovingUnit) u).SearchForTarget();
             }
         }
 

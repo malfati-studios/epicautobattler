@@ -6,6 +6,9 @@ namespace Units
 {
     public abstract class Unit : MonoBehaviour
     {
+        [SerializeField] public Faction faction;
+        [SerializeField] public UnitType type;
+
         public Action<bool> deathListeners;
         
         [SerializeField] public int HP;
@@ -16,16 +19,14 @@ namespace Units
         public abstract void PlayDeathAnimation();
         public abstract void PlayDamageAnimation();
         
-        public bool TakeDamage(int damage)
+        public void TakeDamage(int damage)
         {
             HP -= damage;
             PlayDamageAnimation();
             if (HP < 1)
             {
                 Die();
-                return true;
             }
-            return false;
         }
 
         public Sprite GetSprite()
@@ -42,10 +43,12 @@ namespace Units
         {
             this.battleLogicController = battleLogicController;
         }
+        
 
         private void Die()
         {
             battleLogicController.NotifyDeath(gameObject.GetComponent<MovingUnit>());
+            deathListeners.Invoke(true);
             PlayDeathAnimation();
             Invoke("DestroyInstance", 1f);
         }

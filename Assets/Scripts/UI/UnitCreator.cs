@@ -6,7 +6,7 @@ namespace UI
 {
     public class UnitCreator : MonoBehaviour
     {
-        public Action<UnitType> unitCreateEvent;
+        public Action<Unit> unitCreateEvent;
 
         private Vector2 mousePos;
         private Camera mainCamera;
@@ -28,15 +28,20 @@ namespace UI
             _spriteRenderer.sprite = unitToCreate.GetComponent<Unit>().GetSprite();
         }
 
+        public void DisableCreation()
+        {
+            creatingUnit = false;
+            unitToCreate = null;
+            _spriteRenderer.sprite = null;
+        }
+
         private void Update()
         {
             if (!creatingUnit) return;
 
             if (Input.GetMouseButtonDown(1))
             {
-                creatingUnit = false;
-                unitToCreate = null;
-                _spriteRenderer.sprite = null;
+                DisableCreation();
                 return;
             }
 
@@ -49,7 +54,8 @@ namespace UI
 
                 if (rayHit.collider == null)
                 {
-                    Instantiate(unitToCreate, transform.position, Quaternion.identity);
+                    GameObject newUnit = Instantiate(unitToCreate, transform.position, Quaternion.identity);
+                    unitCreateEvent.Invoke(newUnit.GetComponent<Unit>());
                 }
             }
         }

@@ -37,7 +37,15 @@ namespace Units.Types
         {
             if (attackAnimationState != AttackAnimationState.NOT_PLAYING)
             {
-                UpdateAttackAnimation();
+                if (target)
+                {
+                    UpdateAttackAnimation();
+                }
+                else
+                {
+                    ResetAttackPosition();
+                    attackAnimationState = AttackAnimationState.NOT_PLAYING;
+                }
             }
 
             base.Update();

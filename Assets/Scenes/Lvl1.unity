@@ -7016,6 +7016,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6137947070603884741, guid: 3b14dc718f374214e93a0695dce2ba4e, type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b14dc718f374214e93a0695dce2ba4e, type: 3}
 --- !u!1001 &886668012
@@ -9896,6 +9900,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6137947070603884741, guid: 3b14dc718f374214e93a0695dce2ba4e, type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b14dc718f374214e93a0695dce2ba4e, type: 3}
 --- !u!1001 &1823351790
@@ -10714,6 +10722,10 @@ PrefabInstance:
     - target: {fileID: 2880099801877461587, guid: 027403669be641b45b8a6f491637bad6, type: 3}
       propertyPath: m_Name
       value: Footman
+      objectReference: {fileID: 0}
+    - target: {fileID: 7033362234915995391, guid: 027403669be641b45b8a6f491637bad6, type: 3}
+      propertyPath: faction
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8139664288065294789, guid: 027403669be641b45b8a6f491637bad6, type: 3}
       propertyPath: m_LocalPosition.x
