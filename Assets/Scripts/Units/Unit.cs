@@ -1,6 +1,8 @@
 ﻿using System;
 using Controllers;
+using UI;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Units
 {
@@ -8,6 +10,8 @@ namespace Units
     {
         [SerializeField] public Faction faction;
         [SerializeField] public UnitType type;
+        
+        [SerializeField] private UnitHealthBar healthBar;
 
         public Action<bool> deathListeners;
         
@@ -28,6 +32,7 @@ namespace Units
         {
             currentHP -= damage;
             PlayDamageAnimation();
+            healthBar.UpdateBar(HP, currentHP);
             if (currentHP < 1)
             {
                 Die();
@@ -37,6 +42,7 @@ namespace Units
         public void ReceiveHeal(int healAmount)
         {
             currentHP += healAmount;
+            healthBar.UpdateBar(HP, currentHP);
             if (currentHP > HP)
             {
                 currentHP = HP;
@@ -64,12 +70,28 @@ namespace Units
             battleLogicController.NotifyDeath(gameObject.GetComponent<MovingUnit>());
             deathListeners.Invoke(true);
             PlayDeathAnimation();
-            Invoke("DestroyInstance", 1f);
+            Invoke("DeactivateInstance", 1f);
         }
 
-        private void DestroyInstance()
+        private void DeactivateInstance()
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
+        }
+
+        private void Awake()
+        {
+            FindHealthBar();
+        }
+
+        private void FindHealthBar()
+        {
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                if (transform.GetChild(i).CompareTag("UnitHealthBar"))
+                {
+                    healthBar = transform.GetChild(i).GetComponent<UnitHealthBar>();
+                }
+            }
         }
     }
 }

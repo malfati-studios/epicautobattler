@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading;
 using Units;
 using UnityEngine;
 using Utils;
@@ -10,7 +12,10 @@ namespace Controllers
         [SerializeField] private int allEnemyUnitsCount;
         [SerializeField] private int allPlayerUnitsCount;
 
+        ReaderWriterLock alivePlayerUnitsLock = new ReaderWriterLock();
         [SerializeField] private List<Unit> alivePlayerUnits = new List<Unit>();
+
+        ReaderWriterLock aliveEnemyUnitsLock = new ReaderWriterLock();
         [SerializeField] private List<Unit> aliveEnemyUnits = new List<Unit>();
 
         [SerializeField] private Dictionary<UnitType, int> currentUnitCredits;
@@ -32,41 +37,47 @@ namespace Controllers
         {
             if (movingUnit.faction == Faction.PLAYER)
             {
-                return UnitTargetHelper.GetClosestUnit(movingUnit, alivePlayerUnits);
+                return SafelyReadFromAlivePlayerUnits(movingUnit, UnitTargetHelper.GetClosestUnit);
             }
-
-            return UnitTargetHelper.GetClosestUnit(movingUnit, aliveEnemyUnits);
+            else
+            {
+                return SafelyReadFromEnemyPlayerUnits(movingUnit, UnitTargetHelper.GetClosestUnit);
+            }
         }
-        
+
         public Unit GetNearestHurtAlly(Unit movingUnit)
         {
             if (movingUnit.faction == Faction.PLAYER)
             {
-                return UnitTargetHelper.GetClosestHurtUnit(movingUnit, alivePlayerUnits);
+                return SafelyReadFromAlivePlayerUnits(movingUnit, UnitTargetHelper.GetClosestHurtUnit);
             }
 
-            return UnitTargetHelper.GetClosestHurtUnit(movingUnit, aliveEnemyUnits);
+            return SafelyReadFromEnemyPlayerUnits(movingUnit, UnitTargetHelper.GetClosestHurtUnit);
         }
 
         public Unit GetNearestEnemy(Unit movingUnit)
         {
             if (movingUnit.faction == Faction.PLAYER)
             {
-                return UnitTargetHelper.GetClosestUnit(movingUnit, aliveEnemyUnits);
+                return SafelyReadFromEnemyPlayerUnits(movingUnit, UnitTargetHelper.GetClosestUnit);
             }
 
-            return UnitTargetHelper.GetClosestUnit(movingUnit, alivePlayerUnits);
+            return SafelyReadFromAlivePlayerUnits(movingUnit, UnitTargetHelper.GetClosestUnit);
         }
 
         public void NotifyDeath(MovingUnit go)
         {
             if (go.faction == Faction.PLAYER)
             {
+                alivePlayerUnitsLock.AcquireWriterLock(500);
                 alivePlayerUnits.Remove(go.GetComponent<MovingUnit>());
+                alivePlayerUnitsLock.ReleaseWriterLock();
             }
             else
             {
+                aliveEnemyUnitsLock.AcquireWriterLock(500);
                 aliveEnemyUnits.Remove(go.GetComponent<MovingUnit>());
+                aliveEnemyUnitsLock.ReleaseWriterLock();
             }
 
             battleUIController.RefreshArmyBarsUI(alivePlayerUnits.Count, allPlayerUnitsCount,
@@ -75,7 +86,10 @@ namespace Controllers
 
         public int NotifyNewUnitAndReturnCreditsLeft(Unit u)
         {
+            alivePlayerUnitsLock.AcquireWriterLock(500);
             alivePlayerUnits.Add(u);
+            alivePlayerUnitsLock.ReleaseWriterLock();
+            
             allPlayerUnitsCount++;
             currentUnitCredits[u.type] = currentUnitCredits[u.type] - 1;
 
@@ -128,6 +142,24 @@ namespace Controllers
 
             allEnemyUnitsCount = aliveEnemyUnits.Count;
             allPlayerUnitsCount = alivePlayerUnits.Count;
+        }
+
+        private Unit SafelyReadFromAlivePlayerUnits(Unit u, Func<Unit, List<Unit>, Unit> callback)
+        {
+            Unit result;
+            alivePlayerUnitsLock.AcquireReaderLock(500);
+            result = callback(u, alivePlayerUnits);
+            alivePlayerUnitsLock.ReleaseReaderLock();
+            return result;
+        }
+
+        private Unit SafelyReadFromEnemyPlayerUnits(Unit u, Func<Unit, List<Unit>, Unit> callback)
+        {
+            Unit result;
+            aliveEnemyUnitsLock.AcquireReaderLock(500);
+            result = callback(u, aliveEnemyUnits);
+            aliveEnemyUnitsLock.ReleaseReaderLock();
+            return result;
         }
     }
 }

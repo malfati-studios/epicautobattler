@@ -5,7 +5,17 @@ namespace Utils
 {
     public class UnitTargetHelper
     {
-        public static Unit GetClosestUnit(Unit movingUnit, List<Unit> units, bool searchHurtTarget = false)
+        public static Unit GetClosestUnit(Unit movingUnit, List<Unit> units)
+        {
+            return GetClosestUnit(movingUnit, units, false);
+        }
+
+        public static Unit GetClosestHurtUnit(Unit movingUnit, List<Unit> units)
+        {
+            return GetClosestUnit(movingUnit, units, true);
+        }
+
+        private static Unit GetClosestUnit(Unit movingUnit, List<Unit> units, bool searchHurtTarget = false)
         {
             if (units.Count == 0) return null;
 
@@ -26,11 +36,6 @@ namespace Utils
             }
 
             return closestOtherMovingUnit;
-        }
-
-        public static Unit GetClosestHurtUnit(Unit movingUnit, List<Unit> alivePlayerUnits)
-        {
-            return GetClosestUnit(movingUnit, alivePlayerUnits, true);
         }
 
         private static float GetDistanceToUnit(Unit a, Unit b)
