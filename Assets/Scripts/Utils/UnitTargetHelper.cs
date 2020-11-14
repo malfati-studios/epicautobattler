@@ -5,7 +5,7 @@ namespace Utils
 {
     public class UnitTargetHelper
     {
-        public static Unit GetClosestUnit(Unit movingUnit, List<Unit> units)
+        public static Unit GetClosestUnit(Unit movingUnit, List<Unit> units, bool searchHurtTarget = false)
         {
             if (units.Count == 0) return null;
 
@@ -15,7 +15,8 @@ namespace Utils
             foreach (var otherUnit in units)
             {
                 if (AreTheSameUnit(movingUnit, otherUnit)) continue;
-                
+                if (searchHurtTarget && !otherUnit.IsHurt()) continue;
+
                 float currentDistance = GetDistanceToUnit(movingUnit, otherUnit);
                 if (currentDistance < closestDistance)
                 {
@@ -27,6 +28,11 @@ namespace Utils
             return closestOtherMovingUnit;
         }
 
+        public static Unit GetClosestHurtUnit(Unit movingUnit, List<Unit> alivePlayerUnits)
+        {
+            return GetClosestUnit(movingUnit, alivePlayerUnits, true);
+        }
+
         private static float GetDistanceToUnit(Unit a, Unit b)
         {
             return (a.transform.position - b.transform.position).magnitude;
@@ -36,7 +42,7 @@ namespace Utils
         {
             return movingUnit.gameObject.GetInstanceID() == otherMovingUnit.gameObject.GetInstanceID();
         }
-        
+
         public static bool CanSearchForTarget(Unit unit)
         {
             return unit.GetType().IsSubclassOf(typeof(MovingUnit))

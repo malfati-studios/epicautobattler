@@ -51,12 +51,6 @@ namespace Units.Types
             base.Update();
         }
 
-
-        public override void Attack()
-        {
-            base.Attack();
-        }
-
         public override void PlayDeathAnimation()
         {
         }
@@ -107,6 +101,7 @@ namespace Units.Types
         private void InitializeStats()
         {
             HP = stats.HP;
+            currentHP = HP;
             speed = stats.speed;
             stopDistance = stats.stopDistance;
             attack = stats.attack;

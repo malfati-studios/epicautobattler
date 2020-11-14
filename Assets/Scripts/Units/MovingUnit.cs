@@ -75,7 +75,7 @@ namespace Units
             return -1;
         }
         
-        public void SearchForTarget()
+        public virtual void SearchForTarget()
         {
             if (!target)
             {
@@ -90,9 +90,10 @@ namespace Units
             }
         }
 
-        private void OnTargetDeath(bool obj)
+        protected void OnTargetDeath(bool obj)
         {
             ClearTarget();
+            SearchForTarget();
         }
 
         private void Move()

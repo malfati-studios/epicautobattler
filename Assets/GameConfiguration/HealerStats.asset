@@ -18,5 +18,5 @@ MonoBehaviour:
   attack: 0
   attackRange: 0
   millisBetweenAttacks: 0
-  supportStrength: 20
+  supportStrength: 10
   millisBetweenSupports: 3000

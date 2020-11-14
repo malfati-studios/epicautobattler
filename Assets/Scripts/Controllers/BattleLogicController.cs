@@ -37,6 +37,16 @@ namespace Controllers
 
             return UnitTargetHelper.GetClosestUnit(movingUnit, aliveEnemyUnits);
         }
+        
+        public Unit GetNearestHurtAlly(Unit movingUnit)
+        {
+            if (movingUnit.faction == Faction.PLAYER)
+            {
+                return UnitTargetHelper.GetClosestHurtUnit(movingUnit, alivePlayerUnits);
+            }
+
+            return UnitTargetHelper.GetClosestHurtUnit(movingUnit, aliveEnemyUnits);
+        }
 
         public Unit GetNearestEnemy(Unit movingUnit)
         {

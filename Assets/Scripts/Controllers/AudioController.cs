@@ -6,6 +6,8 @@ namespace Controllers
     {
         public static AudioController instance = null;
         [SerializeField] private AudioSource clickSound = null;
+        [SerializeField] private AudioSource healSound = null;
+
 
         private void Awake()
         {
@@ -15,6 +17,11 @@ namespace Controllers
         public void PlayClickSound()
         {
             clickSound.Play();
+        }
+
+        public void PlayHealSound()
+        {
+            healSound.Play();
         }
 
         private void Initialize()

@@ -12,20 +12,34 @@ namespace Units
         public Action<bool> deathListeners;
         
         [SerializeField] public int HP;
+        [SerializeField] public int currentHP;
 
         private GameObject image;
         protected BattleLogicController battleLogicController;
         
         public abstract void PlayDeathAnimation();
         public abstract void PlayDamageAnimation();
-        
+
+        public bool IsHurt()
+        {
+            return currentHP < HP;
+        }
         public void TakeDamage(int damage)
         {
-            HP -= damage;
+            currentHP -= damage;
             PlayDamageAnimation();
-            if (HP < 1)
+            if (currentHP < 1)
             {
                 Die();
+            }
+        }
+
+        public void ReceiveHeal(int healAmount)
+        {
+            currentHP += healAmount;
+            if (currentHP > HP)
+            {
+                currentHP = HP;
             }
         }
 

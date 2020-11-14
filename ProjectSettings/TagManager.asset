@@ -19,7 +19,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - FX
   - 
   - 
   - 
@@ -61,4 +61,7 @@ TagManager:
     locked: 0
   - name: UnitCreator
     uniqueID: 1775931939
+    locked: 0
+  - name: FX
+    uniqueID: 337830289
     locked: 0
