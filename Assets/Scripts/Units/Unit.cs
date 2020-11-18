@@ -67,6 +67,8 @@ namespace Units
         {
             return battleLogicController != null && battleLogicController.BattleStarted();
         }
+
+        protected abstract void InitializeStats();
         
         private void Die()
         {
@@ -84,6 +86,7 @@ namespace Units
         private void Awake()
         {
             FindHealthBar();
+            InitializeStats();
         }
 
         private void FindHealthBar()

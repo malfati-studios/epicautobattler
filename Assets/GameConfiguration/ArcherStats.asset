@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HP: 60
   speed: 0.6
-  stopDistance: 1.5
+  stopDistance: 2
   attack: 10
   attackRange: 0
   millisBetweenAttacks: 3000

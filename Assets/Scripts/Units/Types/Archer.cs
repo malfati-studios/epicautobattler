@@ -1,4 +1,5 @@
-﻿using Data;
+﻿using Controllers;
+using Data;
 using UnityEngine;
 
 namespace Units.Types
@@ -6,27 +7,20 @@ namespace Units.Types
     public class Archer : AttackingMovingUnit
     {
         [SerializeField] private UnitStats stats;
+        [SerializeField] private GameObject arrow;
+
         // Start is called before the first frame update
         public override bool IsSupportClass()
         {
             return false;
         }
 
-        protected override void Start()
-        {
-            base.Start();
-            InitializeStats();
-           
-        }
-
         // Update is called once per frame
         public override void PlayAttackAnimation()
         {
-        }
-
-        protected override void Update()
-        {
-            base.Update();
+            GameObject arrowGo = Instantiate(arrow, transform.position, Quaternion.identity);
+            arrowGo.GetComponent<Arrow>().Initialize(target, this);
+            AudioController.instance.PlayArrowFly();
         }
 
         public override void PlayDeathAnimation()
@@ -39,8 +33,14 @@ namespace Units.Types
         {
             
         }
+
+        public void NotifyHitTarget()
+        {
+            DamageCallback();
+            AudioController.instance.PlayArrowHitSound();
+        }
         
-        private void InitializeStats()
+        protected override void InitializeStats()
         {
             HP = stats.HP;
             currentHP = HP;

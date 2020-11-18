@@ -126,7 +126,7 @@ Animator:
   m_GameObject: {fileID: 5984465954985758335}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ec924c5a8cc33064c95f8bc99815dbd1, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -158,6 +158,7 @@ MonoBehaviour:
   attack: 0
   millisBetweenAttacks: 0
   stats: {fileID: 11400000, guid: f7c7f91ceb71c5049a3b0002ac2c5c89, type: 2}
+  arrow: {fileID: 7610251876002790184, guid: 11fea385a39f8244b895a0e199a83da8, type: 3}
 --- !u!1001 &5984465955784738085
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -60,7 +60,6 @@ namespace Units.Types
         protected override void Start()
         {
             base.Start();
-            InitializeStats();
             healFX = transform.GetChild(1).gameObject;
         }
 
@@ -91,7 +90,7 @@ namespace Units.Types
             AudioController.instance.PlayHealSound();
         }
         
-        private void InitializeStats()
+        protected override void InitializeStats()
         {
             HP = stats.HP;
             currentHP = HP;

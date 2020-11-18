@@ -62,13 +62,6 @@ namespace Units.Types
         {
         }
 
-        protected override void Start()
-        {
-            base.Start();
-            InitializeStats();
-           
-        }
-
         private void UpdateAttackAnimation()
         {
             if (attackAnimationState == AttackAnimationState.GOING_BACKWARDS)
@@ -103,7 +96,7 @@ namespace Units.Types
             animator.enabled = true;
         }
 
-        private void InitializeStats()
+        protected override void InitializeStats()
         {
             HP = stats.HP;
             currentHP = HP;

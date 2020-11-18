@@ -10,6 +10,11 @@ namespace Controllers
         [SerializeField] private AudioSource punchFX1 = null;
         [SerializeField] private AudioSource punchFX2 = null;
         [SerializeField] private AudioSource punchFX3 = null;
+        [SerializeField] private AudioSource arrowFlyFX = null;
+        [SerializeField] private AudioSource arrowHitFX1 = null;
+        [SerializeField] private AudioSource arrowHitFX2 = null;
+
+
 
         private void Awake()
         {
@@ -25,6 +30,11 @@ namespace Controllers
         {
             healSound.Play();
         }
+        
+        public void PlayArrowFly()
+        {
+            arrowFlyFX.Play();
+        }
 
         public void PlayPunchSound()
         {
@@ -39,6 +49,20 @@ namespace Controllers
                     break;
                 case 2:
                     punchFX3.Play();
+                    break;
+            }
+        }
+        
+        public void PlayArrowHitSound()
+        {
+            int rand = Random.Range(0, 2);
+            switch (rand)
+            {
+                case 0:
+                    arrowHitFX1.Play();
+                    break;
+                case 1:
+                    arrowHitFX2.Play();
                     break;
             }
         }
