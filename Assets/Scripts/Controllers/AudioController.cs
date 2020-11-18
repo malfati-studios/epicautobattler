@@ -7,7 +7,9 @@ namespace Controllers
         public static AudioController instance = null;
         [SerializeField] private AudioSource clickSound = null;
         [SerializeField] private AudioSource healSound = null;
-
+        [SerializeField] private AudioSource punchFX1 = null;
+        [SerializeField] private AudioSource punchFX2 = null;
+        [SerializeField] private AudioSource punchFX3 = null;
 
         private void Awake()
         {
@@ -22,6 +24,23 @@ namespace Controllers
         public void PlayHealSound()
         {
             healSound.Play();
+        }
+
+        public void PlayPunchSound()
+        {
+            int rand = Random.Range(0, 3);
+            switch (rand)
+            {
+                case 0:
+                    punchFX1.Play();
+                    break;
+                case 1:
+                    punchFX2.Play();
+                    break;
+                case 2:
+                    punchFX3.Play();
+                    break;
+            }
         }
 
         private void Initialize()

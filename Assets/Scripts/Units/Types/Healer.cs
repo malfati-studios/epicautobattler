@@ -12,13 +12,11 @@ namespace Units.Types
         [SerializeField] public int millisBetweenSupports;
 
         private DateTime lastHealTime = DateTime.Now;
-        private DateTime lastTargetSearch = DateTime.Now;
         private GameObject healFX;
         private int healAmount;
 
         public void Heal()
         {
-            Debug.Log("HEAL");
             lastHealTime = DateTime.Now;
             PlayHealAnimation();
             target.ReceiveHeal(healAmount);
@@ -40,10 +38,6 @@ namespace Units.Types
         protected override void Update()
         {
             base.Update();
-            if (!HasTarget() && CheckLastTargetSearchTime() && battleLogicController != null)
-            {
-                SearchForTarget();
-            }
 
             if (HasTarget() && !target.IsHurt())
             {
@@ -61,10 +55,7 @@ namespace Units.Types
             return DateTime.Now > lastHealTime.AddMilliseconds(millisBetweenSupports);
         }
         
-        private bool CheckLastTargetSearchTime()
-        {
-            return DateTime.Now > lastTargetSearch.AddMilliseconds(millisBetweenSupports);
-        }
+       
 
         protected override void Start()
         {
@@ -75,6 +66,7 @@ namespace Units.Types
 
         public override void PlayDeathAnimation()
         {
+            animator.enabled = false;
         }
 
         public override void PlayDamageAnimation()

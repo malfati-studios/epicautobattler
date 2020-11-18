@@ -27,8 +27,10 @@ namespace Controllers
         public void Initialize(BattleUIController battleUIController, Dictionary<UnitType, int> unitCredits)
         {
             currentUnitCredits = new Dictionary<UnitType, int>();
-            currentUnitCredits[UnitType.Footman] = unitCredits[UnitType.Footman];
-            currentUnitCredits[UnitType.Healer] = unitCredits[UnitType.Healer];
+            currentUnitCredits[UnitType.FOOTMAN] = unitCredits[UnitType.FOOTMAN];
+            currentUnitCredits[UnitType.HEALER] = unitCredits[UnitType.HEALER];
+            currentUnitCredits[UnitType.ARCHER] = unitCredits[UnitType.ARCHER];
+
             this.battleUIController = battleUIController;
             ScanUnits();
         }
@@ -70,13 +72,13 @@ namespace Controllers
             if (go.faction == Faction.PLAYER)
             {
                 alivePlayerUnitsLock.AcquireWriterLock(500);
-                alivePlayerUnits.Remove(go.GetComponent<MovingUnit>());
+                alivePlayerUnits.Remove(go.GetComponent<Unit>());
                 alivePlayerUnitsLock.ReleaseWriterLock();
             }
             else
             {
                 aliveEnemyUnitsLock.AcquireWriterLock(500);
-                aliveEnemyUnits.Remove(go.GetComponent<MovingUnit>());
+                aliveEnemyUnits.Remove(go.GetComponent<Unit>());
                 aliveEnemyUnitsLock.ReleaseWriterLock();
             }
 
@@ -160,6 +162,11 @@ namespace Controllers
             result = callback(u, aliveEnemyUnits);
             aliveEnemyUnitsLock.ReleaseReaderLock();
             return result;
+        }
+
+        public bool BattleStarted()
+        {
+            return battleStarted;
         }
     }
 }

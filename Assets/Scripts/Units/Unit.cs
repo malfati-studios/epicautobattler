@@ -63,8 +63,12 @@ namespace Units
         {
             this.battleLogicController = battleLogicController;
         }
-        
 
+        protected bool BattleStarted()
+        {
+            return battleLogicController != null && battleLogicController.BattleStarted();
+        }
+        
         private void Die()
         {
             battleLogicController.NotifyDeath(gameObject.GetComponent<MovingUnit>());

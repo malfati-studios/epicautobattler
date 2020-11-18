@@ -2,8 +2,8 @@
 {
     public enum  UnitType
     {
-        Footman,
-        Healer,
-        Archer
+        FOOTMAN,
+        HEALER,
+        ARCHER
     }
 }

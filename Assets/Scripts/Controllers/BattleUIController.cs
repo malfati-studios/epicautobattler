@@ -35,11 +35,11 @@ namespace Controllers
             startBattleButton = GameObject.FindGameObjectWithTag("StartBattleButton").GetComponent<StartBattleButton>();
 
             footmanButton.buttonListeners += OnButtonClick;
-            footmanButton.SetUnitCount(unitCredits[UnitType.Footman]);
+            footmanButton.SetUnitCount(unitCredits[UnitType.FOOTMAN]);
             footmanButton.SetUnitPrefab(footmanPrefab);
 
             healerButton.buttonListeners += OnButtonClick;
-            healerButton.SetUnitCount(unitCredits[UnitType.Healer]);
+            healerButton.SetUnitCount(unitCredits[UnitType.HEALER]);
             healerButton.SetUnitPrefab(healerPrefab);
 
             startBattleButton.buttonListeners += OnStartBattleButtonClick;
@@ -59,13 +59,13 @@ namespace Controllers
             int creditsLeft = battleLogicController.NotifyNewUnitAndReturnCreditsLeft(unit);
             switch (unit.type)
             {
-                case UnitType.Footman:
+                case UnitType.FOOTMAN:
                     footmanButton.NotifyUnitCreated();
                     break;
-                case UnitType.Healer:
+                case UnitType.HEALER:
                     healerButton.NotifyUnitCreated();
                     break;
-                case UnitType.Archer:
+                case UnitType.ARCHER:
                     break;
             }
 

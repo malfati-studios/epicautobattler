@@ -26,9 +26,9 @@ namespace Controllers
         {
             currentCredits = startingConfiguration.startingCredits;
             unitCredits = new Dictionary<UnitType, int>();
-            unitCredits.Add(UnitType.Archer, startingConfiguration.startingArchers);
-            unitCredits.Add(UnitType.Footman, startingConfiguration.startingFootmen);
-            unitCredits.Add(UnitType.Healer, startingConfiguration.startingHealers);
+            unitCredits.Add(UnitType.ARCHER, startingConfiguration.startingArchers);
+            unitCredits.Add(UnitType.FOOTMAN, startingConfiguration.startingFootmen);
+            unitCredits.Add(UnitType.HEALER, startingConfiguration.startingHealers);
             SceneController.instance.LoadSceneInstant(1);
         }
 

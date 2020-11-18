@@ -1,4 +1,5 @@
-﻿using Data;
+﻿using Controllers;
+using Data;
 using UnityEngine;
 
 namespace Units.Types
@@ -26,7 +27,7 @@ namespace Units.Types
                 -GetAttackingDirection() / 8, 0.3f);
             backwardsVector2Lerper.SetValues(new Vector2(0f, 0f),
                 -GetAttackingDirection() / 8, true);
-        }
+    }
 
         public override bool IsSupportClass()
         {
@@ -53,6 +54,7 @@ namespace Units.Types
 
         public override void PlayDeathAnimation()
         {
+            animator.enabled = false;
         }
 
         public override void PlayDamageAnimation()
@@ -63,6 +65,7 @@ namespace Units.Types
         {
             base.Start();
             InitializeStats();
+           
         }
 
         private void UpdateAttackAnimation()
@@ -86,6 +89,7 @@ namespace Units.Types
                 {
                     attackAnimationState = AttackAnimationState.NOT_PLAYING;
                     DamageCallback();
+                    AudioController.instance.PlayPunchSound();
                     //The amount of time we want the footman to be on the enemy
                     Invoke("ResetAttackPosition", 0.3f);
                 }
@@ -107,5 +111,6 @@ namespace Units.Types
             attack = stats.attack;
             millisBetweenAttacks = stats.millisBetweenAttacks;
         }
+       
     }
 }
