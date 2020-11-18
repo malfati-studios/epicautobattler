@@ -47,7 +47,9 @@ MonoBehaviour:
   enemyBar: {fileID: 0}
   footmanButton: {fileID: 0}
   healerButton: {fileID: 0}
+  archerButton: {fileID: 0}
   startBattleButton: {fileID: 0}
   footmanPrefab: {fileID: 2880099801877461587, guid: 027403669be641b45b8a6f491637bad6, type: 3}
   healerPrefab: {fileID: 1806916297380161318, guid: 3b14dc718f374214e93a0695dce2ba4e, type: 3}
+  archerPrefab: {fileID: 5984465954985758335, guid: 1975318cb3b86b84e883da1a5ce831c9, type: 3}
   unitCreatorPrefab: {fileID: 3476035090485196187, guid: 0a497b1e4660d7c48ba58f26b22c11a5, type: 3}

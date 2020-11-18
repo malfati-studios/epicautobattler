@@ -12,10 +12,12 @@ namespace Controllers
         [SerializeField] private ArmyBar enemyBar;
         [SerializeField] private UnitButton footmanButton;
         [SerializeField] private UnitButton healerButton;
+        [SerializeField] private UnitButton archerButton;
         [SerializeField] private StartBattleButton startBattleButton;
 
         [SerializeField] private GameObject footmanPrefab;
         [SerializeField] private GameObject healerPrefab;
+        [SerializeField] private GameObject archerPrefab;
         [SerializeField] private GameObject unitCreatorPrefab;
 
         private BattleLogicController battleLogicController;
@@ -32,6 +34,7 @@ namespace Controllers
             enemyBar = GameObject.FindGameObjectWithTag("EnemyBar").GetComponent<ArmyBar>();
             footmanButton = GameObject.FindGameObjectWithTag("FootmanButton").GetComponent<UnitButton>();
             healerButton = GameObject.FindGameObjectWithTag("HealerButton").GetComponent<UnitButton>();
+            archerButton = GameObject.FindGameObjectWithTag("ArcherButton").GetComponent<UnitButton>();
             startBattleButton = GameObject.FindGameObjectWithTag("StartBattleButton").GetComponent<StartBattleButton>();
 
             footmanButton.buttonListeners += OnButtonClick;
@@ -41,6 +44,10 @@ namespace Controllers
             healerButton.buttonListeners += OnButtonClick;
             healerButton.SetUnitCount(unitCredits[UnitType.HEALER]);
             healerButton.SetUnitPrefab(healerPrefab);
+            
+            archerButton.buttonListeners += OnButtonClick;
+            archerButton.SetUnitCount(unitCredits[UnitType.ARCHER]);
+            archerButton.SetUnitPrefab(archerPrefab);
 
             startBattleButton.buttonListeners += OnStartBattleButtonClick;
 
@@ -66,6 +73,7 @@ namespace Controllers
                     healerButton.NotifyUnitCreated();
                     break;
                 case UnitType.ARCHER:
+                    archerButton.NotifyUnitCreated();
                     break;
             }
 

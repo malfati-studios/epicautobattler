@@ -11,6 +11,7 @@ TagManager:
   - HealerButton
   - StartBattleButton
   - UnitHealthBar
+  - ArcherButton
   layers:
   - Default
   - TransparentFX
