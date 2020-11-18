@@ -55,6 +55,7 @@ namespace Controllers
 
             battleUiController.Initialize(currentBattleLogicController, unitCredits);
             battleLogicController.Initialize(currentBattleUiController, unitCredits);
+            AudioController.instance.PlayBattleMusic();
         }
 
 

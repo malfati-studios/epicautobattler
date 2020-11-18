@@ -13,8 +13,7 @@ namespace Controllers
         [SerializeField] private AudioSource arrowFlyFX = null;
         [SerializeField] private AudioSource arrowHitFX1 = null;
         [SerializeField] private AudioSource arrowHitFX2 = null;
-
-
+        [SerializeField] private AudioSource battleMusic = null;
 
         private void Awake()
         {
@@ -29,6 +28,11 @@ namespace Controllers
         public void PlayHealSound()
         {
             healSound.Play();
+        }
+
+        public void PlayBattleMusic()
+        {
+            battleMusic.Play();
         }
         
         public void PlayArrowFly()
