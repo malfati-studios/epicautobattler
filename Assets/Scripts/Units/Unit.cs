@@ -2,7 +2,6 @@
 using Controllers;
 using UI;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Units
 {
@@ -16,7 +15,7 @@ namespace Units
         public Action<bool> deathListeners;
         
         [SerializeField] public int HP;
-        [SerializeField] public int currentHP;
+        [SerializeField] public int currentHP;    
 
         private GameObject image;
         protected BattleLogicController battleLogicController;

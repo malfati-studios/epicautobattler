@@ -22,7 +22,6 @@ namespace Units.Types
         // Update is called once per frame
         public override void PlayAttackAnimation()
         {
-            throw new System.NotImplementedException();
         }
 
         protected override void Update()
@@ -33,6 +32,7 @@ namespace Units.Types
         public override void PlayDeathAnimation()
         {
             animator.enabled = false;
+            StopMoving();
         }
 
         public override void PlayDamageAnimation()

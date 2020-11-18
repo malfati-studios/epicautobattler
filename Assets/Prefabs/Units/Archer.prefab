@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 5984465954985758320}
   m_Layer: 0
   m_Name: Archer
-  m_TagString: Untagged
+  m_TagString: Unit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -168,6 +168,10 @@ PrefabInstance:
     - target: {fileID: 4818312418825522153, guid: 2affe64c6aa72424aadd0c3d8ef644bc, type: 3}
       propertyPath: m_Name
       value: HealthBarCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 4818312418825522153, guid: 2affe64c6aa72424aadd0c3d8ef644bc, type: 3}
+      propertyPath: m_TagString
+      value: UnitHealthBar
       objectReference: {fileID: 0}
     - target: {fileID: 4818312418825522154, guid: 2affe64c6aa72424aadd0c3d8ef644bc, type: 3}
       propertyPath: m_LocalPosition.x

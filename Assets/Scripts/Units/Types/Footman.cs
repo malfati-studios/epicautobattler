@@ -55,6 +55,7 @@ namespace Units.Types
         public override void PlayDeathAnimation()
         {
             animator.enabled = false;
+            StopMoving();
         }
 
         public override void PlayDamageAnimation()
