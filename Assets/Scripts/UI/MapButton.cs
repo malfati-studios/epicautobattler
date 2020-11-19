@@ -1,20 +1,22 @@
 ﻿using Controllers;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class MapButton : MonoBehaviour
+namespace UI
 {
-    [SerializeField] private int mapLvl;
-
-    private void Awake()
+    public class MapButton : MonoBehaviour
     {
-        transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = mapLvl.ToString();
-    }
+        [SerializeField] private int mapLvl;
 
-    public void OnButtonClick()
-    {
-        GameController.instance.OnMapButtonPressed(mapLvl);
-        AudioController.instance.PlayClickSound();
+        private void Awake()
+        {
+            transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = mapLvl.ToString();
+        }
+
+        public void OnButtonClick()
+        {
+            GameController.instance.OnMapButtonPressed(mapLvl);
+            AudioController.instance.PlayClickSound();
+        }
     }
 }
