@@ -12,6 +12,8 @@ TagManager:
   - StartBattleButton
   - UnitHealthBar
   - ArcherButton
+  - WinCondition
+  - LoseCondition
   layers:
   - Default
   - TransparentFX

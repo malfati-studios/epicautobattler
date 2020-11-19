@@ -19,6 +19,9 @@ namespace Controllers
         [SerializeField] private GameObject healerPrefab;
         [SerializeField] private GameObject archerPrefab;
         [SerializeField] private GameObject unitCreatorPrefab;
+        
+        [SerializeField] private GameObject winScreen;
+        [SerializeField] private GameObject loseScreen;
 
         private BattleLogicController battleLogicController;
         private UnitCreator unitCreator;
@@ -51,6 +54,9 @@ namespace Controllers
 
             startBattleButton.buttonListeners += OnStartBattleButtonClick;
 
+            winScreen = GameObject.FindGameObjectWithTag("WinCondition");
+            loseScreen = GameObject.FindGameObjectWithTag("LoseCondition");
+
             this.battleLogicController = battleLogicController;
         }
 
@@ -59,6 +65,18 @@ namespace Controllers
         {
             playerBar.UpdateBar(alivePlayerUnitsCount, allPlayerUnitsCount);
             enemyBar.UpdateBar(aliveEnemyUnitsCount, allEnemyUnitsCount);
+        }
+
+        public void ShowWinScreen()
+        {
+            winScreen.transform.GetChild(0).gameObject.SetActive(true);
+            winScreen.transform.GetChild(1).gameObject.SetActive(true);
+        }
+
+        public void ShowLoseScreen()
+        {
+            loseScreen.transform.GetChild(0).gameObject.SetActive(true);
+            loseScreen.transform.GetChild(1).gameObject.SetActive(true);
         }
 
         private void OnUnitCreation(Unit unit)

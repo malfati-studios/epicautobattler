@@ -44,6 +44,16 @@ namespace Controllers
             return currentBattleLogicController;
         }
 
+        public void NotifyLevelWon()
+        {
+            Invoke("LoadMapScreenWithDelay", 3f);
+        }
+        
+        public void NotifyLevelLost()
+        {
+            Invoke("LoadMapScreenWithDelay", 3f);
+        }
+
         private void SetUpNewBattle()
         {
             BattleLogicController battleLogicController = Instantiate(battleLogicControllerPrefab).GetComponent<BattleLogicController>();
@@ -56,6 +66,7 @@ namespace Controllers
             battleUiController.Initialize(currentBattleLogicController, unitCredits);
             battleLogicController.Initialize(currentBattleUiController, unitCredits);
             AudioController.instance.PlayBattleMusic();
+            waitingForBattleLevelLoad = false;
         }
 
 
@@ -83,6 +94,11 @@ namespace Controllers
         private void Start()
         {
             SceneController.instance.levelLoaded += OnLevelLoaded;
+        }
+
+        private void LoadMapScreenWithDelay()
+        {
+            SceneController.instance.LoadSceneWithTransition(1);
         }
     }
 }

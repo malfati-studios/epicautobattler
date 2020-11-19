@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading;
 using Units;
+using UnityEditor;
 using UnityEngine;
 using Utils;
 
@@ -84,6 +85,12 @@ namespace Controllers
 
             battleUIController.RefreshArmyBarsUI(alivePlayerUnits.Count, allPlayerUnitsCount,
                 aliveEnemyUnits.Count, allEnemyUnitsCount);
+            CheckWinLoseConditions();
+        }
+
+        public bool BattleStarted()
+        {
+            return battleStarted;
         }
 
         public int NotifyNewUnitAndReturnCreditsLeft(Unit u)
@@ -164,9 +171,47 @@ namespace Controllers
             return result;
         }
 
-        public bool BattleStarted()
+     
+        private void CheckWinLoseConditions()
         {
-            return battleStarted;
+            if (CheckPlayerLost())
+            {
+                battleUIController.ShowLoseScreen();
+                GameController.instance.NotifyLevelLost();
+                return;
+            }
+
+            if (CheckPlayerWon())
+            {
+                battleUIController.ShowWinScreen();
+                GameController.instance.NotifyLevelWon();
+                return;
+            }
+            
         }
+
+        private bool CheckPlayerLost()
+        {
+            return alivePlayerUnits.Count == 0 && NoMoreCredits();
+        }
+     
+        private bool CheckPlayerWon()
+        {
+            return aliveEnemyUnits.Count == 0;
+        }
+        
+        private bool NoMoreCredits()
+        {
+            foreach (var unitCredit in currentUnitCredits)
+            {
+                if (unitCredit.Value > 0)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
     }
 }
