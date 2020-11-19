@@ -65,7 +65,6 @@ namespace Controllers
 
             battleUiController.Initialize(currentBattleLogicController, unitCredits);
             battleLogicController.Initialize(currentBattleUiController, unitCredits);
-            AudioController.instance.PlayBattleMusic();
             waitingForBattleLevelLoad = false;
         }
 
@@ -94,6 +93,7 @@ namespace Controllers
         private void Start()
         {
             SceneController.instance.levelLoaded += OnLevelLoaded;
+            AudioController.instance.PlayBattleMusic();
         }
 
         private void LoadMapScreenWithDelay()
