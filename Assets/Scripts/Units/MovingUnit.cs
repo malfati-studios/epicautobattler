@@ -13,19 +13,18 @@ namespace Units
 
         private bool move = true;
         protected Animator animator;
-        private static readonly int MovingAxis = Animator.StringToHash("MovingAxis");
+        private static readonly int Moving = Animator.StringToHash("Moving");
 
         public abstract bool IsSupportClass();
 
         private void PlayMovingAnimation()
         {
-            animator.enabled = true;
-            animator.SetInteger(MovingAxis, GetMovingAxis());
+            animator.SetBool(Moving, true);
         }
 
         private void StopMovingAnimation()
         {
-            animator.SetInteger(MovingAxis, 0);
+            animator.SetBool(Moving, false);
         }
 
         protected virtual void Start()
@@ -41,6 +40,7 @@ namespace Units
             }
 
             Move();
+            base.Update();
         }
 
         public void StartMoving()
@@ -107,6 +107,7 @@ namespace Units
 
         private void Move()
         {
+            FlipSprite();
             if (!move || !HasTarget() || InRange())
             {
                 StopMovingAnimation();
@@ -116,6 +117,18 @@ namespace Units
             PlayMovingAnimation();
             transform.position =
                 Vector3.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
+        }
+
+        private void FlipSprite()
+        {
+            if (target.transform.position.x > transform.position.x)
+            {
+                transform.GetChild(0).GetComponent<SpriteRenderer>().flipX = false;
+            }
+            else
+            {
+                transform.GetChild(0).GetComponent<SpriteRenderer>().flipX = true;
+            }
         }
 
         private bool CheckLastTargetSearchTime()

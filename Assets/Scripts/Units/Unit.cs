@@ -9,17 +9,21 @@ namespace Units
     {
         [SerializeField] public Faction faction;
         [SerializeField] public UnitType type;
-        
+
         [SerializeField] private UnitHealthBar healthBar;
 
         public Action<bool> deathListeners;
-        
+
         [SerializeField] public int HP;
-        [SerializeField] public int currentHP;    
+        [SerializeField] public int currentHP;
 
         private GameObject image;
         protected BattleLogicController battleLogicController;
-        
+
+
+        private bool dying;
+        private FloatLerper dyingLerper;
+
         public abstract void PlayDeathAnimation();
         public abstract void PlayDamageAnimation();
 
@@ -27,6 +31,7 @@ namespace Units
         {
             return currentHP < HP;
         }
+
         public void TakeDamage(int damage)
         {
             currentHP -= damage;
@@ -63,13 +68,14 @@ namespace Units
             this.battleLogicController = battleLogicController;
         }
 
+
         protected bool BattleStarted()
         {
             return battleLogicController != null && battleLogicController.BattleStarted();
         }
 
         protected abstract void InitializeStats();
-        
+
         private void Die()
         {
             battleLogicController.NotifyDeath(gameObject.GetComponent<MovingUnit>());
@@ -97,6 +103,25 @@ namespace Units
                 {
                     healthBar = transform.GetChild(i).GetComponent<UnitHealthBar>();
                 }
+            }
+        }
+
+        protected void DefaultDeathAnimation()
+        {
+            dying = true;
+            dyingLerper = new FloatLerper(GetImage().GetComponent<SpriteRenderer>().color.a, 1f, 1000,
+                AbstractLerper<float>.SMOOTH_TYPE.STEP_SMOOTHER);
+            dyingLerper.SetValues(GetImage().GetComponent<SpriteRenderer>().color.a, 1f, true);
+        }
+
+        protected void Update()
+        {
+            if (dying)
+            {
+                dyingLerper.Update();
+                Color spriteColor = GetImage().GetComponent<SpriteRenderer>().color;
+                spriteColor.a = dyingLerper.CurrentValue;
+                GetImage().GetComponent<SpriteRenderer>().color = spriteColor;
             }
         }
     }

@@ -28,6 +28,7 @@ namespace Units.Types
         {
             animator.enabled = false;
             StopMoving();
+            DefaultDeathAnimation();
         }
 
         public override void PlayDamageAnimation()
