@@ -19,6 +19,7 @@ namespace Units
 
         private void PlayMovingAnimation()
         {
+            animator.enabled = true;
             animator.SetInteger(MovingAxis, GetMovingAxis());
         }
 

@@ -18,6 +18,7 @@ namespace Units.Types
         // Update is called once per frame
         public override void PlayAttackAnimation()
         {
+            animator.enabled = false;
             GameObject arrowGo = Instantiate(arrow, transform.position, Quaternion.identity);
             arrowGo.GetComponent<Arrow>().Initialize(target, this);
             AudioController.instance.PlayArrowFly();

@@ -105,6 +105,5 @@ namespace Units.Types
             attack = stats.attack;
             millisBetweenAttacks = stats.millisBetweenAttacks;
         }
-       
     }
 }
