@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using JetBrains.Annotations;
+using UnityEngine;
 
 namespace Controllers
 {
@@ -14,6 +15,10 @@ namespace Controllers
         [SerializeField] private AudioSource arrowHitFX1 = null;
         [SerializeField] private AudioSource arrowHitFX2 = null;
         [SerializeField] private AudioSource battleMusic = null;
+        [SerializeField] [NotNull] private AudioSource dieFX1 = null;
+        [SerializeField] private AudioSource dieFX2 = null;
+        [SerializeField] private AudioSource dieFX3 = null;
+
 
         private void Awake()
         {
@@ -53,6 +58,29 @@ namespace Controllers
                     break;
                 case 2:
                     punchFX3.Play();
+                    break;
+            }
+        }
+        
+        public void PlayDeathSound()
+        {
+            int rand = Random.Range(0, 5);
+            switch (rand)
+            {
+                case 0:
+                    dieFX1.Play();
+                    break;
+                case 1:
+                    dieFX2.Play();
+                    break;
+                case 2:
+                    dieFX3.Play();
+                    break;
+                case 3:
+                    dieFX2.Play();
+                    break;
+                case 4:
+                    dieFX3.Play();
                     break;
             }
         }

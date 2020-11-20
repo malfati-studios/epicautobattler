@@ -121,6 +121,7 @@ namespace Units
 
         private void FlipSprite()
         {
+            if (!HasTarget()) return;
             if (target.transform.position.x > transform.position.x)
             {
                 transform.GetChild(0).GetComponent<SpriteRenderer>().flipX = false;

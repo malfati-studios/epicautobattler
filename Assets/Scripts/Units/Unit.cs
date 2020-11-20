@@ -81,6 +81,7 @@ namespace Units
             battleLogicController.NotifyDeath(gameObject.GetComponent<MovingUnit>());
             deathListeners.Invoke(true);
             PlayDeathAnimation();
+            AudioController.instance.PlayDeathSound();
             Invoke("DeactivateInstance", 1f);
         }
 
@@ -109,9 +110,9 @@ namespace Units
         protected void DefaultDeathAnimation()
         {
             dying = true;
-            dyingLerper = new FloatLerper(GetImage().GetComponent<SpriteRenderer>().color.a, 1f, 1000,
+            dyingLerper = new FloatLerper(GetImage().GetComponent<SpriteRenderer>().color.a, 0f, 1.0f,
                 AbstractLerper<float>.SMOOTH_TYPE.STEP_SMOOTHER);
-            dyingLerper.SetValues(GetImage().GetComponent<SpriteRenderer>().color.a, 1f, true);
+            dyingLerper.SetValues(GetImage().GetComponent<SpriteRenderer>().color.a, 0f, true);
         }
 
         protected void Update()
@@ -121,6 +122,7 @@ namespace Units
                 dyingLerper.Update();
                 Color spriteColor = GetImage().GetComponent<SpriteRenderer>().color;
                 spriteColor.a = dyingLerper.CurrentValue;
+                Debug.Log(dyingLerper.CurrentValue);
                 GetImage().GetComponent<SpriteRenderer>().color = spriteColor;
             }
         }
