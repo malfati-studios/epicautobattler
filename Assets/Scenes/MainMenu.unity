@@ -982,14 +982,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 941821403002608097, guid: 17c3955192f235a40bca19bd717666ad, type: 3}
-      propertyPath: battleControllerPrefab
-      value: 
-      objectReference: {fileID: 1733040622417261561, guid: c1dda97d9ee803a478fcd982c060d098, type: 3}
-    - target: {fileID: 941821403002608097, guid: 17c3955192f235a40bca19bd717666ad, type: 3}
-      propertyPath: battleUIControllerPrefab
-      value: 
-      objectReference: {fileID: 8864983057032818113, guid: 0adad07cb68d146498c523476f364603, type: 3}
     - target: {fileID: 941821403002608098, guid: 17c3955192f235a40bca19bd717666ad, type: 3}
       propertyPath: m_Name
       value: GameController
@@ -1014,14 +1006,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 7380837172766309847, guid: 994458f327737c94e987ac4635d71535, type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 8b5d921ae2f66004a8ae0a40eb42f9d6, type: 2}
-    - target: {fileID: 7380837172766309847, guid: 994458f327737c94e987ac4635d71535, type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: 8087633863241413620, guid: 8b5d921ae2f66004a8ae0a40eb42f9d6, type: 2}
     - target: {fileID: 7380837172949069444, guid: 994458f327737c94e987ac4635d71535, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1119,10 +1103,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 452568751, guid: 1adf6f0c68b13b1408620655f08551c0, type: 3}
-      propertyPath: m_Volume
-      value: 0.267
-      objectReference: {fileID: 0}
     - target: {fileID: 8963627019115140508, guid: 1adf6f0c68b13b1408620655f08551c0, type: 3}
       propertyPath: m_Name
       value: AudioController

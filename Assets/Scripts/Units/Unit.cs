@@ -122,7 +122,6 @@ namespace Units
                 dyingLerper.Update();
                 Color spriteColor = GetImage().GetComponent<SpriteRenderer>().color;
                 spriteColor.a = dyingLerper.CurrentValue;
-                Debug.Log(dyingLerper.CurrentValue);
                 GetImage().GetComponent<SpriteRenderer>().color = spriteColor;
             }
         }
