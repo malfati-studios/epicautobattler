@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 03e9619e76d53e0408e4334c428a5e98
+guid: a50b46463eb803147b352a386d9be380
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Kenney Mini
+  - Yoster Island
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0

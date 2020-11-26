@@ -10,33 +10,40 @@ namespace Controllers
         public static GameController instance;
 
         [SerializeField] private StartingConfiguration startingConfiguration;
+        
+        // Currency and credits
+        [SerializeField] private int currentLvl = 0;
+        [SerializeField] private int currentGold;
+        [SerializeField] private Dictionary<UnitType, int> unitCredits;
 
+        // Battle controllers
         [SerializeField] private GameObject battleLogicControllerPrefab;
         [SerializeField] private GameObject battleUIControllerPrefab;
         private BattleLogicController currentBattleLogicController;
         private BattleUIController currentBattleUiController;
 
-        [SerializeField] private int currentLvl = 0;
-        [SerializeField] private int currentCredits;
-        [SerializeField] private Dictionary<UnitType, int> unitCredits;
-
         private bool waitingForBattleLevelLoad;
 
         public void StartGame()
         {
-            currentCredits = startingConfiguration.startingCredits;
+            currentGold = startingConfiguration.startingGold;
             unitCredits = new Dictionary<UnitType, int>();
             unitCredits.Add(UnitType.ARCHER, startingConfiguration.startingArchers);
             unitCredits.Add(UnitType.FOOTMAN, startingConfiguration.startingFootmen);
             unitCredits.Add(UnitType.HEALER, startingConfiguration.startingHealers);
-            SceneController.instance.LoadSceneInstant(1);
+            SceneController.instance.LoadMapMenu();
         }
 
         public void OnMapButtonPressed(int mapLvl)
         {
             currentLvl = mapLvl;
             waitingForBattleLevelLoad = true;
-            SceneController.instance.LoadSceneWithTransition(mapLvl + 1);
+            SceneController.instance.LoadLvlScene(mapLvl);
+        }
+
+        public void OnStoreButtonPressed()
+        {
+            SceneController.instance.LoadStoreScene();
         }
 
         public BattleLogicController GetCurrentBattleController()
@@ -46,17 +53,28 @@ namespace Controllers
 
         public void NotifyLevelWon()
         {
-            Invoke("LoadMapScreenWithDelay", 3f);
+            SceneController.instance.LoadMapScreenWithDelay();
         }
-        
+
         public void NotifyLevelLost()
         {
-            Invoke("LoadMapScreenWithDelay", 3f);
+            SceneController.instance.LoadMapScreenWithDelay();
+        }
+
+        public Dictionary<UnitType, int> GetUnitCredits()
+        {
+            return unitCredits;
+        }
+        
+        public int GetCurrentGold()
+        {
+            return currentGold;
         }
 
         private void SetUpNewBattle()
         {
-            BattleLogicController battleLogicController = Instantiate(battleLogicControllerPrefab).GetComponent<BattleLogicController>();
+            BattleLogicController battleLogicController =
+                Instantiate(battleLogicControllerPrefab).GetComponent<BattleLogicController>();
             BattleUIController battleUiController =
                 Instantiate(battleUIControllerPrefab).GetComponent<BattleUIController>();
 
@@ -69,7 +87,7 @@ namespace Controllers
         }
 
 
-        private void OnLevelLoaded(bool boolean)
+        private void OnLevelLoaded(string lvlName)
         {
             if (waitingForBattleLevelLoad)
             {
@@ -96,9 +114,6 @@ namespace Controllers
             AudioController.instance.PlayBattleMusic();
         }
 
-        private void LoadMapScreenWithDelay()
-        {
-            SceneController.instance.LoadSceneWithTransition(1);
-        }
+     
     }
 }

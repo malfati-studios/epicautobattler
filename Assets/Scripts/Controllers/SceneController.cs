@@ -1,36 +1,50 @@
 ﻿using System;
 using UnityEngine;
-using UnityEngine.SceneManagement; //para trabajar con cambios de escenas
+using UnityEngine.SceneManagement;
 
-//usamos namespaces para organizar mejor nuestro codigo. Respetamos la estructura que definimos aca en la carpeta de Scripts.
 namespace Controllers
 {
     public class SceneController : MonoBehaviour
     {
+        public static string MAIN_MENU_SCENE = "MainMenu";
+        public static string MAP_MENU_SCENE = "MapMenu";
+        public static string STORE_SCENE = "Store";
+        public static string LVL_SCENE_TEMPLATE = "Lvl{0}";
+        public static float MAP_MENU_DELAY_AFTER_BATTLE = 3f;
+
         #region EXPOSED_FIELDS
-        [SerializeField] private CanvasGroup canvasGroup = null; //componente que nos permite modificar propiedades generales de todos los elementos child de tipo UI.
+
+        [SerializeField] private CanvasGroup canvasGroup = null;
         [SerializeField] private float transitionTime = 1.0f;
-        public Action<bool> levelLoaded;
+
+        public Action<string> levelLoaded;
+
         #endregion
 
         #region PRIVATE_FIELDS
+
         private FloatLerper alphaLerper = null;
-        private int nextScene = 0;
+        private string nextScene;
+
         #endregion
 
         #region ENUMS
-        private enum STATE { IDLE, OPENING, CLOSING } // definimos estados para visualizar facilmente en que proceso se encuentra la transicion
+
+        private enum STATE
+        {
+            IDLE,
+            OPENING,
+            CLOSING
+        }
+
         private STATE state = STATE.IDLE;
 
-        public enum SCENES { MAINMENU, GAMEPLAY } //definimos enum de nombres de escenas para pasarlos como parametros
         #endregion
 
-        //Singleton, revisar el pattern con la documentacion.
-        //Nuestra clase tiene una variable estatica llamada instance, la cual depedende de la clase y no de objetos (no requerimos de esta manera
-        //tener que crear referencias en cada codigo que llame a SceneController
         public static SceneController instance = null;
 
         #region UNITY_CALLS
+
         private void Awake()
         {
             Initialize();
@@ -40,33 +54,34 @@ namespace Controllers
         {
             UpdateTransition();
         }
+
         #endregion
 
         #region PUBLIC_METHODS
-        
-        public void LoadSceneInstant(int sceneIndex)
+
+        public void LoadMapScreenWithDelay()
         {
-            //Guardamos la escena proxima y abrimos la transicion
-            nextScene = sceneIndex;
-            SceneManager.LoadScene(nextScene);
-            levelLoaded.Invoke(true);
+            Invoke("LoadMapMenu", MAP_MENU_DELAY_AFTER_BATTLE);
         }
-        public void LoadSceneWithTransition(int sceneIndex)
+        public void LoadMapMenu()
         {
-            //Guardamos la escena proxima y abrimos la transicion
-            nextScene = sceneIndex;
-            OnTransitionStart();
+            LoadSceneInstant(MAP_MENU_SCENE);
         }
 
-        public void LoadSceneWithTransition(SCENES scene)
+        public void LoadStoreScene()
         {
-            //mismo caso, recibiendo como parametro un enum que casteamos a int por el build index que configuramos.
-            nextScene = (int)scene;
-            OnTransitionStart();
+            LoadSceneInstant(STORE_SCENE);
         }
+
+        public void LoadLvlScene(int lvl)
+        {
+            LoadSceneWithTransition(String.Format(LVL_SCENE_TEMPLATE, lvl));
+        }
+
         #endregion
 
         #region PRIVATE_METHODS
+
         private void Initialize()
         {
             //si no hay ninguna instancia
@@ -143,8 +158,24 @@ namespace Controllers
             //si el alpha esta en 0 termino la transicion, desbloqueamos la interaccion y ponemos el estado en idle para arrancar devuelta.
             canvasGroup.blocksRaycasts = false;
             state = STATE.IDLE;
-            levelLoaded.Invoke(true);
+            levelLoaded.Invoke(nextScene);
         }
+
+        private void LoadSceneInstant(string sceneIndex)
+        {
+            //Guardamos la escena proxima y abrimos la transicion
+            nextScene = sceneIndex;
+            SceneManager.LoadScene(nextScene);
+            levelLoaded.Invoke(nextScene);
+        }
+
+        private void LoadSceneWithTransition(string sceneName)
+        {
+            //Guardamos la escena proxima y abrimos la transicion
+            nextScene = sceneName;
+            OnTransitionStart();
+        }
+
         #endregion
     }
 }

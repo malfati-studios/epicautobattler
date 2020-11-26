@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/MapMenu.unity
     guid: 8884bd522466f664fa2108a3477119b3
   - enabled: 1
+    path: Assets/Scenes/Store.unity
+    guid: 79b333f71b10d9e4998ff08fef6d7ca5
+  - enabled: 1
     path: Assets/Scenes/Lvl1.unity
     guid: 590a092cf8d548643bf19b754dd0137b
   - enabled: 1

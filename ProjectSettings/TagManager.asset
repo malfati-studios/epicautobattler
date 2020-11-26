@@ -14,6 +14,7 @@ TagManager:
   - ArcherButton
   - WinCondition
   - LoseCondition
+  - MapUIController
   layers:
   - Default
   - TransparentFX
