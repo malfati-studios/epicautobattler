@@ -970,6 +970,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 941821403002608097, guid: 17c3955192f235a40bca19bd717666ad, type: 3}
+      propertyPath: levelConfigurations.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 941821403002608097, guid: 17c3955192f235a40bca19bd717666ad, type: 3}
+      propertyPath: levelConfigurations.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 23f0e6c2c6be7bd459a0a0e7b1ea61bc, type: 2}
+    - target: {fileID: 941821403002608097, guid: 17c3955192f235a40bca19bd717666ad, type: 3}
+      propertyPath: levelConfigurations.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 277f6c2518d8a9b4e9528f36262112c8, type: 2}
+    - target: {fileID: 941821403002608097, guid: 17c3955192f235a40bca19bd717666ad, type: 3}
+      propertyPath: levelConfigurations.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 372f5358fd9d5ed488bfcc056d71d79f, type: 2}
+    - target: {fileID: 941821403002608097, guid: 17c3955192f235a40bca19bd717666ad, type: 3}
+      propertyPath: levelConfigurations.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: 1220d6d30c79a2e4fab6858fdd95db84, type: 2}
     - target: {fileID: 941821403002608098, guid: 17c3955192f235a40bca19bd717666ad, type: 3}
       propertyPath: m_Name
       value: GameController

@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &745581894
 RectTransform:
   m_ObjectHideFlags: 0
@@ -151,7 +151,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &943728252
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1523,7 +1523,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4784817064375652512, guid: 8052b96e4d9f6164b99029a7b8b97994, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4784817064375652515, guid: 8052b96e4d9f6164b99029a7b8b97994, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1539,7 +1539,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4784817064612364843, guid: 8052b96e4d9f6164b99029a7b8b97994, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4784817064612364853, guid: 8052b96e4d9f6164b99029a7b8b97994, type: 3}
       propertyPath: m_fontAsset
