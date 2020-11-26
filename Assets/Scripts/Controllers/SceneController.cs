@@ -63,6 +63,7 @@ namespace Controllers
         {
             Invoke("LoadMapMenu", MAP_MENU_DELAY_AFTER_BATTLE);
         }
+
         public void LoadMapMenu()
         {
             LoadSceneInstant(MAP_MENU_SCENE);
@@ -71,6 +72,16 @@ namespace Controllers
         public void LoadStoreScene()
         {
             LoadSceneInstant(STORE_SCENE);
+        }
+
+        public void RestartGame()
+        {
+            Invoke("ResetGame", 3f);
+        }
+
+        private void ResetGame()
+        {
+            LoadSceneWithTransition(MAIN_MENU_SCENE);
         }
 
         public void LoadLvlScene(int lvl)

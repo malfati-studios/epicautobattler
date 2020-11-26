@@ -40,6 +40,11 @@ namespace Controllers
             battleMusic.Play();
         }
         
+        public void StopBattleMusic()
+        {
+            battleMusic.Stop();
+        }
+        
         public void PlayArrowFly()
         {
             arrowFlyFX.Play();

@@ -287,7 +287,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 72836177}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5514655243680267817}
+        m_TargetAssemblyTypeName: Controllers.StoreUIController, Assembly-CSharp
+        m_MethodName: BackToMenuButtonPressed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &72836177
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -559,6 +571,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4704420520095152931, guid: 3af96da74d9ca9d4eaebe9485c8b27d0, type: 3}
   m_PrefabInstance: {fileID: 356300765}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &356300767 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4704420519513790067, guid: 3af96da74d9ca9d4eaebe9485c8b27d0, type: 3}
+  m_PrefabInstance: {fileID: 356300765}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &416061399
 GameObject:
   m_ObjectHideFlags: 0
@@ -1021,6 +1044,39 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5109556003206884241, guid: fc90d5fda5a748040b1bc05ee2f13532, type: 3}
   m_PrefabInstance: {fileID: 764342210}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &764342212 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5109556004545529396, guid: fc90d5fda5a748040b1bc05ee2f13532, type: 3}
+  m_PrefabInstance: {fileID: 764342210}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &764342213 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5109556003379977701, guid: fc90d5fda5a748040b1bc05ee2f13532, type: 3}
+  m_PrefabInstance: {fileID: 764342210}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &764342214 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5109556003264278094, guid: fc90d5fda5a748040b1bc05ee2f13532, type: 3}
+  m_PrefabInstance: {fileID: 764342210}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &885063789
 GameObject:
   m_ObjectHideFlags: 0
@@ -1239,7 +1295,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1016430133}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5514655243680267817}
+        m_TargetAssemblyTypeName: Controllers.StoreUIController, Assembly-CSharp
+        m_MethodName: ArcherButtonPressed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1016430133
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1705,7 +1773,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1280147074}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5514655243680267817}
+        m_TargetAssemblyTypeName: Controllers.StoreUIController, Assembly-CSharp
+        m_MethodName: HealerButtonPressed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1280147074
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2380,7 +2460,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1811997219}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5514655243680267817}
+        m_TargetAssemblyTypeName: Controllers.StoreUIController, Assembly-CSharp
+        m_MethodName: FootmanButtonPressed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1811997219
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2942,6 +3034,46 @@ PrefabInstance:
       propertyPath: m_Name
       value: StoreUIController
       objectReference: {fileID: 0}
+    - target: {fileID: 5514655242552401057, guid: 487817662e860ec4eb6772f35e20270e, type: 3}
+      propertyPath: footmanButton
+      value: 
+      objectReference: {fileID: 1811997216}
+    - target: {fileID: 5514655242552401057, guid: 487817662e860ec4eb6772f35e20270e, type: 3}
+      propertyPath: archerButton
+      value: 
+      objectReference: {fileID: 1016430130}
+    - target: {fileID: 5514655242552401057, guid: 487817662e860ec4eb6772f35e20270e, type: 3}
+      propertyPath: healerButton
+      value: 
+      objectReference: {fileID: 1280147071}
+    - target: {fileID: 5514655242552401057, guid: 487817662e860ec4eb6772f35e20270e, type: 3}
+      propertyPath: footmanCreditsNumber
+      value: 
+      objectReference: {fileID: 764342214}
+    - target: {fileID: 5514655242552401057, guid: 487817662e860ec4eb6772f35e20270e, type: 3}
+      propertyPath: archerCreditsNumber
+      value: 
+      objectReference: {fileID: 764342213}
+    - target: {fileID: 5514655242552401057, guid: 487817662e860ec4eb6772f35e20270e, type: 3}
+      propertyPath: healerCreditsNumber
+      value: 
+      objectReference: {fileID: 764342212}
+    - target: {fileID: 5514655242552401057, guid: 487817662e860ec4eb6772f35e20270e, type: 3}
+      propertyPath: gold
+      value: 
+      objectReference: {fileID: 356300767}
+    - target: {fileID: 5514655242552401057, guid: 487817662e860ec4eb6772f35e20270e, type: 3}
+      propertyPath: footmanGoldCost
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5514655242552401057, guid: 487817662e860ec4eb6772f35e20270e, type: 3}
+      propertyPath: archerGoldCost
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5514655242552401057, guid: 487817662e860ec4eb6772f35e20270e, type: 3}
+      propertyPath: healerGoldCost
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 5514655242552401058, guid: 487817662e860ec4eb6772f35e20270e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 36.729015
@@ -2988,3 +3120,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 487817662e860ec4eb6772f35e20270e, type: 3}
+--- !u!114 &5514655243680267817 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5514655242552401057, guid: 487817662e860ec4eb6772f35e20270e, type: 3}
+  m_PrefabInstance: {fileID: 5514655243680267816}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c613fddb22caca499962555bcf010ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

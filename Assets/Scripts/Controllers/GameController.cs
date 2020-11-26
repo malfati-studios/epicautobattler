@@ -11,6 +11,9 @@ namespace Controllers
 
         [SerializeField] private StartingConfiguration startingConfiguration;
         
+        //Level Configs
+        [SerializeField] private List<LevelConfiguration> levelConfigurations;
+
         // Currency and credits
         [SerializeField] private int currentLvl = 0;
         [SerializeField] private int currentGold;
@@ -34,7 +37,8 @@ namespace Controllers
             SceneController.instance.LoadMapMenu();
         }
 
-        public void OnMapButtonPressed(int mapLvl)
+
+        public void LoadBattle(int mapLvl)
         {
             currentLvl = mapLvl;
             waitingForBattleLevelLoad = true;
@@ -53,22 +57,32 @@ namespace Controllers
 
         public void NotifyLevelWon()
         {
+            currentGold += levelConfigurations[currentLvl - 1].goldReward;
             SceneController.instance.LoadMapScreenWithDelay();
         }
 
         public void NotifyLevelLost()
         {
-            SceneController.instance.LoadMapScreenWithDelay();
+            ClearGameProgress();
+            AudioController.instance.StopBattleMusic();
+            SceneController.instance.RestartGame();
         }
 
         public Dictionary<UnitType, int> GetUnitCredits()
         {
             return unitCredits;
         }
-        
+
         public int GetCurrentGold()
         {
             return currentGold;
+        }
+
+        public void FinishedShopping(Dictionary<UnitType, int> newUnitCredits, int newGold)
+        {
+            unitCredits = newUnitCredits;
+            currentGold = newGold;
+            SceneController.instance.LoadMapMenu();
         }
 
         private void SetUpNewBattle()
@@ -81,7 +95,7 @@ namespace Controllers
             currentBattleLogicController = battleLogicController;
             currentBattleUiController = battleUiController;
 
-            battleUiController.Initialize(currentBattleLogicController, unitCredits);
+            battleUiController.Initialize(currentBattleLogicController, unitCredits, levelConfigurations[currentLvl-1]);
             battleLogicController.Initialize(currentBattleUiController, unitCredits);
             waitingForBattleLevelLoad = false;
         }
@@ -92,6 +106,11 @@ namespace Controllers
             if (waitingForBattleLevelLoad)
             {
                 SetUpNewBattle();
+            }
+
+            if (lvlName == SceneController.MAIN_MENU_SCENE)
+            {
+                AudioController.instance.PlayBattleMusic();
             }
         }
 
@@ -114,6 +133,19 @@ namespace Controllers
             AudioController.instance.PlayBattleMusic();
         }
 
-     
+        public void EnterStore()
+        {
+            SceneController.instance.LoadStoreScene();
+        }
+
+        private void ClearGameProgress()
+        {
+            currentLvl = 0;
+            currentGold = 0;
+            unitCredits = null;
+            currentBattleLogicController = null;
+            currentBattleUiController = null;
+            waitingForBattleLevelLoad = false;
+        }
     }
 }

@@ -185,7 +185,6 @@ namespace Controllers
             {
                 battleUIController.ShowWinScreen();
                 GameController.instance.NotifyLevelWon();
-                return;
             }
             
         }

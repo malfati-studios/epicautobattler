@@ -55,8 +55,13 @@ namespace UI
             RefreshCount();
             if (unitCount == 0)
             {
-                gameObject.GetComponent<Button>().interactable = false;
+                Deactivate();
             }
+        }
+
+        public void Deactivate()
+        {
+            gameObject.GetComponent<Button>().interactable = false;
         }
     }
 }

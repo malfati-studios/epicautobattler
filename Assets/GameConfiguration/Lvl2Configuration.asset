@@ -9,10 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8a76863046adc544ad1383be8ef0496, type: 3}
-  m_Name: StartingConfiguration
-  m_EditorClassIdentifier: 
-  startingGold: 250
-  startingFootmen: 0
-  startingHealers: 0
-  startingArchers: 0
+  m_Script: {fileID: 11500000, guid: 89d9e6097d257924e9daa091a404bcba, type: 3}
+  m_Name: Lvl2Configuration
+  m_EditorClassIdentifier: Assembly-CSharp:Data:LevelConfiguration
