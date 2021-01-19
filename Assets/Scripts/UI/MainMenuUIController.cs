@@ -1,5 +1,6 @@
 ﻿using Controllers;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace UI
 {
@@ -9,6 +10,16 @@ namespace UI
       {
          AudioController.instance.PlayClickSound();
          GameController.instance.StartGame();
+      }
+      
+      public void QuitButtonPressed()
+      {
+         Application.Quit();
+      }
+      
+      public void CreditsButtonPressed()
+      {
+        SceneController.instance.LoadCreditsScene();
       }
    }
 }

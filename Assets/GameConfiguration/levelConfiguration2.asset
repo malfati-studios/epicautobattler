@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: b1ef7d62d87341fd9593518d052e4721, type: 3}
   m_Name: levelConfiguration2
-  m_EditorClassIdentifier: Assembly-CSharp:Data:LevelConfiguration
+  m_EditorClassIdentifier: 
   lvlNumber: 2
-  goldReward: 200
+  goldReward: 350

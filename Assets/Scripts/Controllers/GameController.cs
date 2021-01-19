@@ -10,9 +10,11 @@ namespace Controllers
         public static GameController instance;
 
         [SerializeField] private StartingConfiguration startingConfiguration;
-        
+
         //Level Configs
         [SerializeField] private List<LevelConfiguration> levelConfigurations;
+        [SerializeField] private List<bool> wonLevels;
+
 
         // Currency and credits
         [SerializeField] private int currentLvl = 0;
@@ -58,7 +60,16 @@ namespace Controllers
         public void NotifyLevelWon()
         {
             currentGold += levelConfigurations[currentLvl - 1].goldReward;
-            SceneController.instance.LoadMapScreenWithDelay();
+            wonLevels[currentLvl - 1] = true;
+
+            if (wonLevels.TrueForAll(lvl => lvl))
+            {
+                SceneController.instance.LoadGameWonScene();
+            }
+            else
+            {
+                SceneController.instance.LoadMapScreenWithDelay();
+            }
         }
 
         public void NotifyLevelLost()
@@ -85,6 +96,11 @@ namespace Controllers
             SceneController.instance.LoadMapMenu();
         }
 
+        public List<bool> GetWonLevels()
+        {
+            return wonLevels;
+        }
+
         private void SetUpNewBattle()
         {
             BattleLogicController battleLogicController =
@@ -95,7 +111,8 @@ namespace Controllers
             currentBattleLogicController = battleLogicController;
             currentBattleUiController = battleUiController;
 
-            battleUiController.Initialize(currentBattleLogicController, unitCredits, levelConfigurations[currentLvl-1]);
+            battleUiController.Initialize(currentBattleLogicController, unitCredits,
+                levelConfigurations[currentLvl - 1]);
             battleLogicController.Initialize(currentBattleUiController, unitCredits);
             waitingForBattleLevelLoad = false;
         }

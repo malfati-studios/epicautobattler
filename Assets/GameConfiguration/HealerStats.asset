@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: HealerStats
   m_EditorClassIdentifier: 
   HP: 50
-  speed: 0.3
+  speed: 0.4
   stopDistance: 1
   attack: 0
   attackRange: 0
   millisBetweenAttacks: 0
-  supportStrength: 10
+  supportStrength: 30
   millisBetweenSupports: 3000

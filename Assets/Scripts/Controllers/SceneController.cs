@@ -10,6 +10,9 @@ namespace Controllers
         public static string MAP_MENU_SCENE = "MapMenu";
         public static string STORE_SCENE = "Store";
         public static string LVL_SCENE_TEMPLATE = "Lvl{0}";
+        public static string GAME_WON_SCENE = "GameWon";
+        public static string CREDITS_SCENE = "Credits";
+
         public static float MAP_MENU_DELAY_AFTER_BATTLE = 3f;
 
         #region EXPOSED_FIELDS
@@ -58,6 +61,21 @@ namespace Controllers
         #endregion
 
         #region PUBLIC_METHODS
+        
+        public void LoadMainMenu()
+        {
+            LoadSceneInstant(MAIN_MENU_SCENE);
+        }
+        
+        public void LoadGameWonScene()
+        {
+            LoadSceneWithTransition(GAME_WON_SCENE);
+        }
+        
+        public void LoadCreditsScene()
+        {
+            LoadSceneInstant(CREDITS_SCENE);
+        }
 
         public void LoadMapScreenWithDelay()
         {
@@ -188,5 +206,8 @@ namespace Controllers
         }
 
         #endregion
+
+
+    
     }
 }

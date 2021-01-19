@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using JetBrains.Annotations;
 using TMPro;
 using Units;
 using UnityEngine;
@@ -13,7 +14,13 @@ namespace Controllers
         [SerializeField] private TextMeshProUGUI gold;
         [SerializeField] private GameObject emptyArmyWarning;
 
+        [SerializeField] [NotNull] private GameObject lvl1Button;
+        [SerializeField] [NotNull] private GameObject lvl2Button;
+        [SerializeField] [NotNull] private GameObject lvl3Button;
+        [SerializeField] [NotNull] private GameObject lvl4Button;
+
         private Dictionary<UnitType, int> unitCredits;
+        private List<bool> wonLevels;
 
         public void Start()
         {
@@ -23,12 +30,38 @@ namespace Controllers
             healerCreditsNumber.text = unitCredits[UnitType.HEALER].ToString();
             gold.text = GameController.instance.GetCurrentGold().ToString();
             emptyArmyWarning.SetActive(false);
+            wonLevels = GameController.instance.GetWonLevels();
+            if (wonLevels[0])
+            {
+                lvl1Button.transform.GetChild(1).gameObject.SetActive(true);
+            }
+            
+            if (wonLevels[1])
+            {
+                lvl2Button.transform.GetChild(1).gameObject.SetActive(true);
+            }
+            
+            if (wonLevels[2])
+            {
+                lvl3Button.transform.GetChild(1).gameObject.SetActive(true);
+            }
+            
+            if (wonLevels[3])
+            {
+                lvl4Button.transform.GetChild(1).gameObject.SetActive(true);
+            }
+
         }
 
         public void StoreButtonPressed()
         {
             AudioController.instance.PlayClickSound();
             GameController.instance.EnterStore();
+        }
+        
+        public void QuitButtonPressed()
+        {
+            Application.Quit();
         }
 
         public void OnMapButtonPressed(int mapLvl)
