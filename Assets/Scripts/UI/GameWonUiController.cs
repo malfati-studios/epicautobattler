@@ -1,9 +1,18 @@
-﻿using UnityEngine;
+﻿using Controllers;
+using UnityEngine;
 
-public class GameWonUiController : MonoBehaviour
+namespace UI
 {
-    public void OnQuitButtonPressed()
+    public class GameWonUiController : MonoBehaviour
     {
-        Application.Quit();
+        public void OnQuitButtonPressed()
+        {
+            Application.Quit();
+        }
+    
+        public void OnPlayAgainButtonPressed()
+        {
+            SceneController.instance.LoadMainMenu();
+        }
     }
 }

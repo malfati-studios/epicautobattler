@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Data;
 using TMPro;
 using UI;
@@ -25,6 +26,9 @@ namespace Controllers
 
         [SerializeField] private GameObject winScreen;
         [SerializeField] private GameObject loseScreen;
+        
+        [SerializeField] private GameObject pausePanel;
+        
 
         private BattleLogicController battleLogicController;
         private UnitCreator unitCreator;
@@ -57,6 +61,7 @@ namespace Controllers
             healerButton = GameObject.FindGameObjectWithTag("HealerButton").GetComponent<UnitButton>();
             archerButton = GameObject.FindGameObjectWithTag("ArcherButton").GetComponent<UnitButton>();
             startBattleButton = GameObject.FindGameObjectWithTag("StartBattleButton").GetComponent<StartBattleButton>();
+            pausePanel = GameObject.FindGameObjectWithTag("PausePanel").transform.GetChild(0).gameObject;
 
             footmanButton.SetUnitPrefab(footmanPrefab);
             if (unitCredits[UnitType.FOOTMAN] > 0)
@@ -90,6 +95,7 @@ namespace Controllers
             {
                 archerButton.Deactivate();
             }
+            
 
             startBattleButton.buttonListeners += OnStartBattleButtonClick;
         }
@@ -148,6 +154,14 @@ namespace Controllers
         private void OnStartBattleButtonClick(bool boolean)
         {
             battleLogicController.StartBattle();
+        }
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                pausePanel.SetActive(!pausePanel.activeInHierarchy);
+            }
         }
     }
 }
